@@ -5,16 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:controlExtension"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid DataContext="{Binding Source={StaticResource Locator}}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="100"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <TextBox x:Name="txt1" Text="{Binding Main.MainWin.text1}" Grid.Column="0" Width="50" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
-        <TextBox x:Name="txt2" Text="fgdjtfhkfu" Grid.Column="1" Height="20" HorizontalContentAlignment="Right" />
-        <Button Grid.Column="2" Content="Button" HorizontalAlignment="Right" VerticalAlignment="Center" 
-                x:Name="btn1" Width="75" Click="btn1_Click"/>
-    </Grid>
+        Title="MainWindow" Height="450" Width="400">
+    <StackPanel DataContext="{Binding Source={StaticResource Locator}}">
+        <StackPanel>
+            <StackPanel VerticalAlignment="Bottom" Margin="5,5,0,0">
+                <Label Content="Sensor data"/>
+                <TextBox x:Name="txt1" Text="{Binding Main.MainWin.text1}"
+                 Width="200" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Grid.Column="2" Content="btnHome" Height="20" Margin="5,5,0,0"
+                x:Name="btnHome" Width="75" Click="btn1_Click"/>
+                <Button Grid.Column="2" Content="btnUp"  Height="20" Margin="5,5,0,0"
+                x:Name="btnUp" Width="75" Click="btnUp_Click"/>
+                <Button Grid.Column="2" Content="btnDown" Height="20" Margin="5,5,0,0"
+                x:Name="btnDown" Width="75" Click="btnDown_Click"/>
+                <Button Grid.Column="2" Content="btnSave" Height="20" Margin="5,5,0,0"
+                x:Name="btnSave" Width="75" Click="btnSave_Click" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5,5,0,0">
+                <Button Content="Button" x:Name="btnData" Width="75" Click="btnData_Click" Height="20"/>
+                <CheckBox Content="auto" VerticalAlignment="Center" IsChecked="{Binding Main.MainWin.chkValue}"
+                          x:Name="autoGetCheckBox" Checked="autoGetCheckBox_Checked" 
+                          Unchecked="autoGetCheckBox_Checked"/>
+            </StackPanel>
+        </StackPanel>
+
+
+    </StackPanel>
 </Window>

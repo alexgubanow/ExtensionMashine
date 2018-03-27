@@ -33,32 +33,17 @@ namespace controlExtension.ViewModel
         public MainWin()
         {
             text1 = "13";
+
         }
 
         private string _text1;
+        public string text1 { get { return _text1; } set { _text1 = value; RaisePropertyChanged("text1"); } }
 
-        /// <summary>
-        /// Sets and gets the  property.
-        /// Changes to that property's value raise the PropertyChanged event.
-        /// </summary>
-        public string text1
-        {
-            get
-            {
-                return _text1;
-            }
-
-            set
-            {
-                if (_text1 == value)
-                {
-                    return;
-                }
-
-                _text1 = value;
-                RaisePropertyChanged(text1);
-            }
-        }
+        private bool _chkValue;
+        public bool chkValue { get { return _chkValue; } set {
+                _chkValue = value;
+                text1 = value ? "Правда" : "Ложь";
+                RaisePropertyChanged("chkValue"); } }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
