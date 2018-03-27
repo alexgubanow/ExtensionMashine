@@ -1,0 +1,24 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2005
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "stm32f103Control", "stm32f103Control\stm32f103Control.vcxproj", "{E65D8652-863C-4EB9-9B84-C9DD413F9DF8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|VisualGDB = Debug|VisualGDB
+		Release|VisualGDB = Release|VisualGDB
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E65D8652-863C-4EB9-9B84-C9DD413F9DF8}.Debug|VisualGDB.ActiveCfg = Debug|VisualGDB
+		{E65D8652-863C-4EB9-9B84-C9DD413F9DF8}.Debug|VisualGDB.Build.0 = Debug|VisualGDB
+		{E65D8652-863C-4EB9-9B84-C9DD413F9DF8}.Release|VisualGDB.ActiveCfg = Release|VisualGDB
+		{E65D8652-863C-4EB9-9B84-C9DD413F9DF8}.Release|VisualGDB.Build.0 = Release|VisualGDB
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8822E618-E604-4F41-8BC2-850C6B0ECBBF}
+	EndGlobalSection
+EndGlobal
