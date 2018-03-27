@@ -247,6 +247,21 @@
     <ClCompile Include="stm32f1xx_it.c">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="dma.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="gpio.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="i2c.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="spi.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="tim.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stm32f1xx_hal_conf.h">
@@ -538,6 +553,21 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="stm32f1xx_it.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="dma.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="gpio.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="i2c.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="spi.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="tim.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>
