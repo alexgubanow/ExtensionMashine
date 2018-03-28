@@ -1,5 +1,6 @@
 using GalaSoft.MvvmLight;
-using System.Collections.Generic;
+using OxyPlot;
+using OxyPlot.Series;
 using System.ComponentModel;
 
 namespace controlExtension.ViewModel
@@ -41,6 +42,22 @@ namespace controlExtension.ViewModel
         {
             Status = "";
             chkValue = false;
+            plotViewModel = new PlotModel();
+            //for (int j = 0; j < linearModel.timeMoments[0].Nodes.Length; j++)
+            //{
+            //    var s1 = new LineSeries();
+            //    s1.Title = "node" + j;
+            //    s1.StrokeThickness = 1.2;
+            //    s1.LineStyle = LineStyle.Solid;
+            //    s1.Color = OxyColor.FromRgb(255, 0, 0);
+            //    //s1.Color = OxyColor.FromRgb(41, 177, 255);
+            //    //s1.RenderInLegend = false;
+            //    for (int i = 0; i < counts; i++)
+            //    {
+            //        s1.Points.Add(new DataPoint(linearModel.time[i], linearModel.timeMoments[i].Nodes[j].derivatives.displ[0]));
+            //    }
+            //    plotViewModel.Series.Add(s1);
+            //}
         }
 
         private string _Status;
@@ -55,6 +72,22 @@ namespace controlExtension.ViewModel
             {
                 _chkValue = value;
                 RaisePropertyChanged("chkValue");
+            }
+        }
+
+        private PlotModel _plotViewModel;
+
+        public PlotModel plotViewModel
+        {
+            get => _plotViewModel;
+            set
+            {
+                _plotViewModel = value;
+                RaisePropertyChanged("plotViewModel");
+                if ((plotViewModel.Series[0] as LineSeries).Points.Count > 100)
+                {
+                    (plotViewModel.Series[0] as LineSeries).Points.RemoveAt(0);
+                }
             }
         }
 
@@ -88,6 +121,7 @@ namespace controlExtension.ViewModel
         }
 
         private string _IsConnectedText;
+
         public string IsConnectedText
         {
             get { return _IsConnected ? "Connected" : "Disconnected"; }
@@ -95,6 +129,7 @@ namespace controlExtension.ViewModel
         }
 
         private string _IsConnectedButtonText;
+
         public string IsConnectedButtonText
         {
             get { return _IsConnected ? "Disconnect" : "Connect"; }
@@ -112,7 +147,6 @@ namespace controlExtension.ViewModel
 
         private string _answer;
         public string answer { get { return _answer; } set { _answer = value; RaisePropertyChanged("answer"); } }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 

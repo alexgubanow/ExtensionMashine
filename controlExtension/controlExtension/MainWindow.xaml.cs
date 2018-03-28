@@ -1,6 +1,8 @@
 ﻿using controlExtension.ViewModel;
 using MahApps.Metro.Controls;
 using Newtonsoft.Json.Linq;
+using OxyPlot;
+using OxyPlot.Series;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -69,6 +71,11 @@ namespace controlExtension
                         case "hx711?":  
                             vm.hx711.Value = inJSON["hx711"].ToString();
                             vm.MainWin.Status = "Receive hx711 value command \"hx711?\" = " + vm.hx711.Value;
+                            Dispatcher.CurrentDispatcher.Invoke(() =>
+                            {
+                            (vm.MainWin.plotViewModel.Series[0] as LineSeries).Points.Add(new DataPoint(Convert.ToDouble(DateTime.Now.ToString("HHmmss")), Convert.ToDouble(vm.hx711.Value)));
+                                vm.MainWin.plotViewModel.InvalidatePlot(true);
+                            });
                             break;
                     }
                 }
@@ -209,6 +216,11 @@ namespace controlExtension
                 mySerialPort.WriteLine(vm.comPort.comm);
                 vm.MainWin.Status = "Sending command " + commJSON["comm"].ToString();
             }
+        }
+
+        private void btnToEnd_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

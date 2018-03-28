@@ -5,32 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:controlExtension"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        mc:Ignorable="d"
-        Title="Control extension mashine" Height="450" Width="600" BorderBrush="Black" BorderThickness="1"
+                      xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf"
+                      mc:Ignorable="d"
+        Title="Control extension mashine" Height="800" Width="800" BorderBrush="Blue" BorderThickness="1"
                       DataContext="{Binding Main, Source={StaticResource Locator}}" >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" ></RowDefinition>
-            <RowDefinition Height="146" ></RowDefinition>
+            <RowDefinition Height="90" ></RowDefinition>
             <RowDefinition Height="26" ></RowDefinition>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Margin="0,5,0,0">
             <GroupBox Header="hx711">
-                <StackPanel Orientation="Horizontal"  Margin="5,5,0,0">
-                    <StackPanel VerticalAlignment="Bottom" Margin="5,5,0,0">
-                        <Label Content="Sensor data" />
-                        <TextBox x:Name="txt1" Text="{Binding hx711.Value}"
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal"  Margin="5,5,0,0">
+                        <StackPanel VerticalAlignment="Bottom" Margin="5,5,0,0">
+                            <Label Content="Sensor data" />
+                            <TextBox x:Name="txt1" Text="{Binding hx711.Value}"
                  Width="200" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="5,5,0,0" VerticalAlignment="Bottom">
-                        <Button Content="Get" x:Name="btnData" Width="75" Click="btnData_Click"
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="5,5,0,0" VerticalAlignment="Bottom">
+                            <Button Content="Get" x:Name="btnData" Width="75" Click="btnData_Click"
                             Height="20" Margin="5,5,0,0" IsEnabled="{Binding  comPort.IsConnected}"/>
-                        <CheckBox Content="auto" VerticalAlignment="Center" Margin="5,5,0,0"
+                            <CheckBox Content="auto" VerticalAlignment="Center" Margin="5,5,0,0"
                               IsChecked="{Binding MainWin.chkValue}" IsEnabled="{Binding  comPort.IsConnected}"
                           x:Name="autoGetCheckBox" Checked="autoGetCheckBox_Checked"
                           Unchecked="autoGetCheckBox_Checked" />
+                        </StackPanel>
                     </StackPanel>
+                    <oxy:PlotView Model="{Binding MainWin.plotViewModel}" />
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="motor control" Margin="0,5,0,0" >
@@ -42,6 +46,8 @@
                 x:Name="btnUp" Width="75" Click="btnUp_Click" IsEnabled="{Binding  comPort.IsConnected}"/>
                         <Button Grid.Column="2" Content="Down" Height="20" Margin="5,5,0,0"
                 x:Name="btnDown" Width="75" Click="btnDown_Click" IsEnabled="{Binding  comPort.IsConnected}"/>
+                        <Button Grid.Column="2" Content="To End" Height="20" Margin="5,5,0,0"
+                x:Name="btnToEnd" Width="75" Click="btnToEnd_Click" IsEnabled="{Binding  comPort.IsConnected}"/>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
@@ -59,8 +65,6 @@
                           DropDownOpened="comPorts_ComboBox_DropDownOpened" />
                     <Button Margin="5,5,0,0" x:Name="btnConnect" Width="80" Click="btnConnect_Click"
                     Content="{Binding  comPort.IsConnectedButtonText}" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="5,5,0,0">
                     <Label Margin="5,5,0,0" Content="Command:" />
                     <TextBox x:Name="command" Text="{Binding comPort.comm}" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Center"
                          Width="110" IsEnabled="{Binding  comPort.IsConnected}" />
