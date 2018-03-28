@@ -7,9 +7,9 @@
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:oxy="clr-namespace:OxyPlot.Wpf;assembly=OxyPlot.Wpf"
                       mc:Ignorable="d"
-        Title="Control extension mashine" Height="800" Width="800" BorderBrush="Blue" BorderThickness="1"
+        Title="Control extension mashine" Height="800" Width="800" BorderBrush="Gray" BorderThickness="1"
                       DataContext="{Binding Main, Source={StaticResource Locator}}" >
-    <Grid>
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="*" ></RowDefinition>
             <RowDefinition Height="90" ></RowDefinition>
@@ -34,7 +34,9 @@
                           Unchecked="autoGetCheckBox_Checked" />
                         </StackPanel>
                     </StackPanel>
-                    <oxy:PlotView Model="{Binding MainWin.plotViewModel}" />
+                    <Grid>
+                        <oxy:PlotView Margin="5,5,0,0" Model="{Binding MainWin.plotViewModel}" Height="300"/>
+                    </Grid>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="motor control" Margin="0,5,0,0" >

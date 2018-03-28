@@ -73,7 +73,8 @@ namespace controlExtension
                             vm.MainWin.Status = "Receive hx711 value command \"hx711?\" = " + vm.hx711.Value;
                             Dispatcher.CurrentDispatcher.Invoke(() =>
                             {
-                            (vm.MainWin.plotViewModel.Series[0] as LineSeries).Points.Add(new DataPoint(Convert.ToDouble(DateTime.Now.ToString("HHmmss")), Convert.ToDouble(vm.hx711.Value)));
+                            (
+                                vm.MainWin.plotViewModel.Series[0] as LineSeries).Points.Add(new DataPoint(Convert.ToDouble(DateTime.Now.ToString("HHmmss")), Convert.ToDouble(vm.hx711.Value)));
                                 vm.MainWin.plotViewModel.InvalidatePlot(true);
                             });
                             break;

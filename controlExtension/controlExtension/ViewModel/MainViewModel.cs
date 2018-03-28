@@ -43,6 +43,11 @@ namespace controlExtension.ViewModel
             Status = "";
             chkValue = false;
             plotViewModel = new PlotModel();
+            var s1 = new LineSeries();
+            s1.LineStyle = LineStyle.Solid;
+            s1.Color = OxyColor.FromRgb(255, 0, 0);
+            s1.RenderInLegend = false;
+            plotViewModel.Series.Add(s1);
             //for (int j = 0; j < linearModel.timeMoments[0].Nodes.Length; j++)
             //{
             //    var s1 = new LineSeries();
@@ -84,10 +89,6 @@ namespace controlExtension.ViewModel
             {
                 _plotViewModel = value;
                 RaisePropertyChanged("plotViewModel");
-                if ((plotViewModel.Series[0] as LineSeries).Points.Count > 100)
-                {
-                    (plotViewModel.Series[0] as LineSeries).Points.RemoveAt(0);
-                }
             }
         }
 
