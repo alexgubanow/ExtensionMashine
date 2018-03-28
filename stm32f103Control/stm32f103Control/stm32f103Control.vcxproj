@@ -34,7 +34,8 @@
     <GNUConfigurationType>Debug</GNUConfigurationType>
     <Toolchain>C:\SysGCC\arm-eabi</Toolchain>
     <ToolchainID>com.visualgdb.arm-eabi</ToolchainID>
-    <ToolchainVersion>7.2.0/8.0.1/r2</ToolchainVersion>
+    <ToolchainVersion>
+    </ToolchainVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">
     <Toolchain>C:\SysGCC\arm-eabi</Toolchain>
