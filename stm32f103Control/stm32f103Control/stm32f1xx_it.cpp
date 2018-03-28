@@ -17,36 +17,24 @@ extern DMA_HandleTypeDef hdma_spi1_tx;
 /**
 * @brief This function handles Non maskable interrupt.
 */
-void NMI_Handler(void)
+extern "C" void NMI_Handler(void)
 {
-  /* USER CODE BEGIN NonMaskableInt_IRQn 0 */
-
-  /* USER CODE END NonMaskableInt_IRQn 0 */
-  /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
-
-  /* USER CODE END NonMaskableInt_IRQn 1 */
 }
 
 /**
 * @brief This function handles Hard fault interrupt.
 */
-void HardFault_Handler(void)
+extern "C" void HardFault_Handler(void)
 {
-  /* USER CODE BEGIN HardFault_IRQn 0 */
-
-  /* USER CODE END HardFault_IRQn 0 */
   while (1)
   {
   }
-  /* USER CODE BEGIN HardFault_IRQn 1 */
-
-  /* USER CODE END HardFault_IRQn 1 */
 }
 
 /**
 * @brief This function handles Memory management fault.
 */
-void MemManage_Handler(void)
+extern "C" void MemManage_Handler(void)
 {
   while (1)
   {
@@ -56,7 +44,7 @@ void MemManage_Handler(void)
 /**
 * @brief This function handles Prefetch fault, memory access fault.
 */
-void BusFault_Handler(void)
+extern "C" void BusFault_Handler(void)
 {
   while (1)
   {
@@ -66,7 +54,7 @@ void BusFault_Handler(void)
 /**
 * @brief This function handles Undefined instruction or illegal state.
 */
-void UsageFault_Handler(void)
+extern "C" void UsageFault_Handler(void)
 {
   while (1)
   {
@@ -76,28 +64,28 @@ void UsageFault_Handler(void)
 /**
 * @brief This function handles System service call via SWI instruction.
 */
-void SVC_Handler(void)
+extern "C" void SVC_Handler(void)
 {
 }
 
 /**
 * @brief This function handles Debug monitor.
 */
-void DebugMon_Handler(void)
+extern "C" void DebugMon_Handler(void)
 {
 }
 
 /**
 * @brief This function handles Pendable request for system service.
 */
-void PendSV_Handler(void)
+extern "C" void PendSV_Handler(void)
 {
 }
 
 /**
 * @brief This function handles System tick timer.
 */
-void SysTick_Handler(void)
+extern "C" void SysTick_Handler(void)
 {
   HAL_IncTick();
   HAL_SYSTICK_IRQHandler();
@@ -113,7 +101,7 @@ void SysTick_Handler(void)
 /**
 * @brief This function handles DMA1 channel2 global interrupt.
 */
-void DMA1_Channel2_IRQHandler(void)
+extern "C" void DMA1_Channel2_IRQHandler(void)
 {
   HAL_DMA_IRQHandler(&hdma_spi1_rx);
 }
@@ -121,7 +109,7 @@ void DMA1_Channel2_IRQHandler(void)
 /**
 * @brief This function handles DMA1 channel3 global interrupt.
 */
-void DMA1_Channel3_IRQHandler(void)
+extern "C" void DMA1_Channel3_IRQHandler(void)
 {
   HAL_DMA_IRQHandler(&hdma_spi1_tx);
 }
@@ -129,7 +117,7 @@ void DMA1_Channel3_IRQHandler(void)
 /**
 * @brief This function handles DMA1 channel6 global interrupt.
 */
-void DMA1_Channel6_IRQHandler(void)
+extern "C" void DMA1_Channel6_IRQHandler(void)
 {
   HAL_DMA_IRQHandler(&hdma_i2c1_tx);
 }
@@ -137,7 +125,7 @@ void DMA1_Channel6_IRQHandler(void)
 /**
 * @brief This function handles DMA1 channel7 global interrupt.
 */
-void DMA1_Channel7_IRQHandler(void)
+extern "C" void DMA1_Channel7_IRQHandler(void)
 {
   HAL_DMA_IRQHandler(&hdma_i2c1_rx);
 }
@@ -145,7 +133,7 @@ void DMA1_Channel7_IRQHandler(void)
 /**
 * @brief This function handles USB low priority or CAN RX0 interrupts.
 */
-void USB_LP_CAN1_RX0_IRQHandler(void)
+extern "C" void USB_LP_CAN1_RX0_IRQHandler(void)
 {
   HAL_PCD_IRQHandler(&hpcd_USB_FS);
 }

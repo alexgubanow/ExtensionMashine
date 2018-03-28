@@ -10,8 +10,21 @@
     <EmbeddedProfileFile>stm32.xml</EmbeddedProfileFile>
   </Project>
   <Build xsi:type="com.visualgdb.build.msbuild">
+    <ToolchainID>
+      <ID>com.visualgdb.arm-eabi</ID>
+      <Version>
+        <GCC>7.2.0</GCC>
+        <GDB>8.0.1</GDB>
+        <Revision>2</Revision>
+      </Version>
+    </ToolchainID>
     <ProjectFile>stm32f103Control.vcxproj</ProjectFile>
-    <ParallelJobCount>0</ParallelJobCount>
+    <RemoteBuildEnvironment>
+      <Records />
+      <EnvironmentSetupFiles />
+    </RemoteBuildEnvironment>
+    <ParallelJobCount>1</ParallelJobCount>
+    <SuppressDirectoryChangeMessages>true</SuppressDirectoryChangeMessages>
   </Build>
   <Debug xsi:type="com.visualgdb.debug.embedded">
     <AdditionalStartupCommands />
@@ -43,84 +56,40 @@
       <DisableSignals>false</DisableSignals>
       <EnableAsyncExecutionMode>false</EnableAsyncExecutionMode>
       <EnableNonStopMode>false</EnableNonStopMode>
+      <MaxBreakpointLimit>0</MaxBreakpointLimit>
     </AdditionalGDBSettings>
-    <DebugMethodID>com.sysprogs.arm.openocd</DebugMethodID>
-    <DebugMethodProperties>
-      <Entries>
-        <KeyValue>
-          <Key>com.sysprogs.arm.openocd.interface</Key>
-          <Value>interface/stlink-v2.cfg</Value>
-        </KeyValue>
-        <KeyValue>
-          <Key>com.sysprogs.arm.openocd.cpu</Key>
-          <Value />
-        </KeyValue>
-        <KeyValue>
-          <Key>com.sysprogs.arm.openocd.chip</Key>
-          <Value />
-        </KeyValue>
-        <KeyValue>
-          <Key>com.sysprogs.arm.openocd.board</Key>
-          <Value />
-        </KeyValue>
-        <KeyValue>
-          <Key>com.sysprogs.arm.openocd.target</Key>
-          <Value>target/stm32f1x.cfg</Value>
-        </KeyValue>
-        <KeyValue>
-          <Key>com.sysprogs.arm.openocd.extraargs</Key>
-          <Value>-c init -c "reset init"</Value>
-        </KeyValue>
-        <KeyValue>
-          <Key>com.sysprogs.arm.openocd.initargs</Key>
-          <Value />
-        </KeyValue>
-        <KeyValue>
-          <Key>com.sysprogs.arm.openocd.commands.halt</Key>
-          <Value>mon halt</Value>
-        </KeyValue>
-        <KeyValue>
-          <Key>com.sysprogs.arm.openocd.commands.program</Key>
-          <Value>load</Value>
-        </KeyValue>
-        <KeyValue>
-          <Key>com.sysprogs.arm.openocd.commands.autoprogram</Key>
-          <Value />
-        </KeyValue>
-        <KeyValue>
-          <Key>com.sysprogs.arm.openocd.commands.reset</Key>
-          <Value>mon reset init</Value>
-        </KeyValue>
-        <KeyValue>
-          <Key>com.sysprogs.arm.openocd.commands.resetafter</Key>
-          <Value />
-        </KeyValue>
-        <KeyValue>
-          <Key>com.sysprogs.arm.openocd.quicksetup.enabled</Key>
-          <Value>1</Value>
-        </KeyValue>
-        <KeyValue>
-          <Key>com.sysprogs.arm.openocd.delay</Key>
-          <Value>0</Value>
-        </KeyValue>
-        <KeyValue>
-          <Key>com.sysprogs.arm.openocd.transport</Key>
-          <Value />
-        </KeyValue>
-        <KeyValue>
-          <Key>com.sysprogs.arm.openocd.quicksetup.interface</Key>
-          <Value>stlink-v2</Value>
-        </KeyValue>
-      </Entries>
-    </DebugMethodProperties>
+    <DebugMethod>
+      <ID>com.sysprogs.arm.openocd</ID>
+      <Configuration xsi:type="com.visualgdb.edp.openocd.settings">
+        <CommandLine>-f interface/stlink-v2.cfg -f target/stm32f1x.cfg -c init -c "reset init"</CommandLine>
+        <ExtraParameters>
+          <Frequency xsi:nil="true" />
+          <BoostedFrequency xsi:nil="true" />
+          <ConnectUnderReset>false</ConnectUnderReset>
+        </ExtraParameters>
+        <LoadProgressGUIThreshold>131072</LoadProgressGUIThreshold>
+        <ProgramMode>Enabled</ProgramMode>
+        <StartupCommands>
+          <string>set remotetimeout 60</string>
+          <string>target remote :$$SYS:GDB_PORT$$</string>
+          <string>mon reset init</string>
+          <string>mon halt</string>
+          <string>load</string>
+        </StartupCommands>
+        <PreferredGDBPort>0</PreferredGDBPort>
+        <PreferredTelnetPort>0</PreferredTelnetPort>
+      </Configuration>
+    </DebugMethod>
     <AutoDetectRTOS>true</AutoDetectRTOS>
     <SemihostingSupport>Auto</SemihostingSupport>
     <StepIntoEntryPoint>false</StepIntoEntryPoint>
     <ReloadFirmwareOnReset>false</ReloadFirmwareOnReset>
     <ValidateEndOfStackAddress>true</ValidateEndOfStackAddress>
     <StopAtEntryPoint>false</StopAtEntryPoint>
+    <CheckInterfaceDrivers>true</CheckInterfaceDrivers>
     <DynamicAnalysisSettings />
     <EndOfStackSymbol>_estack</EndOfStackSymbol>
+    <TimestampProviderTicksPerSecond>0</TimestampProviderTicksPerSecond>
   </Debug>
   <CustomBuild>
     <PreSyncActions />
@@ -142,10 +111,26 @@
   <UserDefinedVariables />
   <ImportedPropertySheets />
   <CodeSense>
-    <Enabled>Unknown</Enabled>
+    <Enabled>False</Enabled>
+    <CFLAGS />
+    <CXXFLAGS />
+    <ExternalSourceFileList />
     <ExtraSettings>
       <HideErrorsInSystemHeaders>true</HideErrorsInSystemHeaders>
+      <SupportLightweightReferenceAnalysis>false</SupportLightweightReferenceAnalysis>
+      <DiscoverySettings>
+        <Mode>Disabled</Mode>
+        <SearchInProjectDir>true</SearchInProjectDir>
+        <SearchInSourceDirs>true</SearchInSourceDirs>
+        <SearchInIncludeSubdirs>true</SearchInIncludeSubdirs>
+        <IgnoredDirs />
+        <IgnoredHeaders />
+      </DiscoverySettings>
     </ExtraSettings>
+    <CodeAnalyzerSettings>
+      <Enabled>false</Enabled>
+    </CodeAnalyzerSettings>
   </CodeSense>
   <BuildContextDirectory>VisualGDB\VisualGDBCache</BuildContextDirectory>
+  <ProgramArgumentsSuggestions />
 </VisualGDBProjectSettings2>
