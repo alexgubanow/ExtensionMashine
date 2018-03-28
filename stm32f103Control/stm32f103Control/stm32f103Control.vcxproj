@@ -48,6 +48,7 @@
     <ClCompile Include="dma.cpp" />
     <ClCompile Include="DWT_delays.cpp" />
     <ClCompile Include="gpio.cpp" />
+    <ClCompile Include="hx711.cpp" />
     <ClCompile Include="i2c.cpp" />
     <ClCompile Include="jsmn.c" />
     <ClCompile Include="JSONpacker.cpp" />
@@ -220,6 +221,7 @@
     <ClInclude Include="dma.h" />
     <ClInclude Include="DWT_delays.h" />
     <ClInclude Include="gpio.h" />
+    <ClInclude Include="hx711.h" />
     <ClInclude Include="i2c.h" />
     <ClInclude Include="jsmn.h" />
     <ClInclude Include="JSONpacker.h" />

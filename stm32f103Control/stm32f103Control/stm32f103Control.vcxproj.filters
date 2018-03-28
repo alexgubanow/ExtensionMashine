@@ -547,6 +547,9 @@
     <ClCompile Include="tim.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="hx711.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stm32f1xx_hal_conf.h">
@@ -598,6 +601,9 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="motorControl.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="hx711.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

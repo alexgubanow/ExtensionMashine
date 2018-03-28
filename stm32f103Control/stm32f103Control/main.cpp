@@ -11,11 +11,12 @@ int main(void)
 	SystemClock_Config();
 
 	MX_GPIO_Init();
-	MX_DMA_Init();
-	MX_I2C1_Init();
+	//MX_DMA_Init();
+	//MX_I2C1_Init();
 	MX_TIM1_Init();
-	MX_SPI1_Init();
+	//MX_SPI1_Init();
 	MX_USB_DEVICE_Init();
+
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 	TIM1->CCR1 = 3000;
 	for (;;)
