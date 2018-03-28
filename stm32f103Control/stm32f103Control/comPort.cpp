@@ -42,19 +42,35 @@ void comPort::parseInStr()
 		}
 	}
 }
-
+int asfds = 0;
+int rev = 0;
 void comPort::sendAnswer()
 {
-	if (strcmp(commRx, "MSBread?") == 0)
+	if (strcmp(commRx, "hx711?") == 0)
 	{
-		unsigned char msbRX[1] = { 0 };
+		/*unsigned char msbRX[1] = { 0 };
 		char normStr[10];
 		snprintf(normStr, 10, "%X", msbRX[0]);
-		sendStr(commRx, "Data", (char*)normStr, Wait);
-	}
-	else if (strcmp(commRx, "MSBwrite?") == 0)
-	{
-		sendStr(commRx, "status", "true", Wait);
+		sendStr(commRx, "Data", (char*)normStr, Wait);*/
+		char normStr[10];
+		snprintf(normStr, 10, "%u", asfds);
+		sendStr(commRx, "hx711", normStr, Wait);
+		if (!rev)
+		{
+			asfds++;
+		}
+		else
+		{
+			asfds--;
+		}
+		if(asfds > 50)
+		{
+			rev = 1;
+		}
+		else if (asfds < 2)
+		{
+			rev = 0;
+		}
 	}
 	else if (strcmp(commRx, "STAT?") == 0)
 	{
