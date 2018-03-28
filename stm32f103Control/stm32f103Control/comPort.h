@@ -5,13 +5,7 @@
 #include "usb_device.h"
 #include "jsmn.h"
 #include "JSONpacker.h"
-
-//extern dlis2k dlis2kinst;
-//extern icTW28 icTW28inst;
-//extern icMSB icMSBinst;
-//extern icMCB icMCBinst;
-//extern imageProc imageProcinst;
-//extern posCalc posCalcinst;
+#include "motorControl.h"
 
 class comPort
 {
@@ -22,7 +16,6 @@ class comPort
 		NoWait,
 		Wait
 	}waitForTXtype;
-	const char ResolutionTypesStrings[10][6] = { "um0_1", "um0_2", "um0_3", "um0_4", "um0_5", "um0_6", "um0_7", "um0_8", "um0_9", "um1_0" };
 public:
 	int resultCode;
 	jsmn_parser p;

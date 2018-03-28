@@ -45,17 +45,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="comPort.cpp" />
-    <ClCompile Include="dma.c" />
+    <ClCompile Include="dma.cpp" />
     <ClCompile Include="DWT_delays.cpp" />
-    <ClCompile Include="gpio.c" />
-    <ClCompile Include="i2c.c" />
+    <ClCompile Include="gpio.cpp" />
+    <ClCompile Include="i2c.cpp" />
     <ClCompile Include="jsmn.c" />
     <ClCompile Include="JSONpacker.cpp" />
-    <ClCompile Include="main.c" />
-    <ClCompile Include="spi.c" />
-    <ClCompile Include="stm32f1xx_it.c" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="motorControl.cpp" />
+    <ClCompile Include="spi.cpp" />
+    <ClCompile Include="stm32f1xx_it.cpp" />
     <ClCompile Include="system_stm32f1xx.c" />
-    <ClCompile Include="tim.c" />
+    <ClCompile Include="tim.cpp" />
     <ClCompile Include="usbd_cdc_if.c" />
     <ClCompile Include="usbd_conf.c" />
     <ClCompile Include="usbd_desc.c" />
@@ -223,6 +224,7 @@
     <ClInclude Include="jsmn.h" />
     <ClInclude Include="JSONpacker.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="motorControl.h" />
     <ClInclude Include="spi.h" />
     <ClInclude Include="stm32f1xx_hal_conf.h" />
     <ClInclude Include="stm32f1xx_it.h" />

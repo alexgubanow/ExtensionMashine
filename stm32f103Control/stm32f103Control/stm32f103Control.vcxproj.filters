@@ -40,9 +40,6 @@
     <ClCompile Include="system_stm32f1xx.c">
       <Filter>Source files</Filter>
     </ClCompile>
-    <ClCompile Include="main.c">
-      <Filter>Source files</Filter>
-    </ClCompile>
     <ClCompile Include="usbd_cdc_if.c">
       <Filter>Source files</Filter>
     </ClCompile>
@@ -53,24 +50,6 @@
       <Filter>Source files</Filter>
     </ClCompile>
     <ClCompile Include="usbd_desc.c">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="stm32f1xx_it.c">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="dma.c">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="gpio.c">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="i2c.c">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="spi.c">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="tim.c">
       <Filter>Source files</Filter>
     </ClCompile>
     <ClCompile Include="comPort.cpp">
@@ -544,6 +523,30 @@
     <ClCompile Include="JSONpacker.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="dma.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="gpio.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="i2c.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="motorControl.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="spi.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="stm32f1xx_it.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="tim.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stm32f1xx_hal_conf.h">
@@ -592,6 +595,9 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="JSONpacker.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="motorControl.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,10 @@
 #include "main.h"
+#include "comPort.h"
+#include "motorControl.h"
 int ibuh = 0;
+comPort cP;
+motorControl mC;
+
 int main(void)
 {
 	HAL_Init();
@@ -11,18 +16,16 @@ int main(void)
 	MX_TIM1_Init();
 	MX_SPI1_Init();
 	MX_USB_DEVICE_Init();
-
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+	TIM1->CCR1 = 3000;
 	for (;;)
 	{
 		if (isCOM_RX)
 		{
+			cP.parseInStr();
+			cP.sendAnswer();
 			HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
 			isCOM_RX = 0;
-
-			USBD_StatusTypeDef result = USBD_OK;
-			snprintf((char *)UserTxBufferFS, 2048, "{\"comm\":\"%s\"}", (char*)UserRxBufferFS);
-			USBD_CDC_SetTxBuffer(&hUsbDeviceFS, UserTxBufferFS, strlen((char *)UserTxBufferFS));
-			USBD_CDC_TransmitPacket(&hUsbDeviceFS);
 		}
 	}
 }
