@@ -2,14 +2,15 @@
 #include "pin.h"
 class drv8825
 {
+public:
 	struct pinsStruct
 	{
 		/*m1 config pin*/
-		pin M1;
+		pin M0;
 		/*m2 config pin*/
-		pin M2;
+		pin M1;
 		/*m3 config pin*/
-		pin M3;
+		pin M2;
 		/*SLEEP pin, 0 - enable, 1 - disable*/
 		pin SLEEP;
 		/*RESET pin, 0 - enable, 1 - disable*/
@@ -18,10 +19,21 @@ class drv8825
 		pin EN;
 		/*FAULT pin, 0 - enable, 1 - disable*/
 		pin FAULT;
+		/*DIR pin, setting direction of moving*/
+		pin DIR;
 	} _pins;
 	/*state indicate state of drv8825*/
 	unsigned char state;
-public:
+	enum pinState
+	{
+		Enable = GPIO_PIN_RESET,
+		Disable = GPIO_PIN_SET
+	};
+	enum movDir
+	{
+		Direct = 0,
+		Reverse = 1
+	};
 	enum microStepRes
 	{
 		Full_step = 0,
@@ -37,17 +49,16 @@ public:
 	drv8825(pinsStruct pins, microStepRes mRes)
 	{
 		_pins = pins;
+		EnableDrv(Disable);
+		Sleep(Disable);
+		Reset(Disable);
 		setRes(mRes);
-	};
-	enum pinState
-	{
-		Enable = GPIO_PIN_RESET,
-		Disable = GPIO_PIN_SET
 	};
 	void setRes(microStepRes mRes);
 	inline void EnableDrv(pinState newState) { _pins.EN.set((GPIO_PinState)newState); }
 	inline void Sleep(pinState newState) { _pins.SLEEP.set((GPIO_PinState)newState); }
 	inline void Reset(pinState newState) { _pins.RST.set((GPIO_PinState)newState); }
+	inline void Direction(movDir newState) { _pins.RST.set((GPIO_PinState)newState); }
 	inline pinState getState() { state = _pins.FAULT.get(); return (pinState)state; };
 	~drv8825() {};
 };

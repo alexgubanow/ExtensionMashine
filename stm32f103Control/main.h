@@ -10,3 +10,4 @@
 #include "tim.h"
 
 void SystemClock_Config(void);
+void initDrv();

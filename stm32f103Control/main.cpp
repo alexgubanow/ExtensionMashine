@@ -23,7 +23,7 @@ int main(void)
 	MX_TIM1_Init();
 	//MX_SPI1_Init();
 	MX_USB_DEVICE_Init();
-
+	initDrv();
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 	TIM1->CCR1 = 3000;
 	for (;;)
@@ -38,6 +38,20 @@ int main(void)
 			isCOM_RX = 0;
 		}
 	}
+}
+
+void initDrv()
+{
+	drv8825::pinsStruct drvpinsStruct;
+	drvpinsStruct.M0 = pin(sp1MOSI_M0_GPIO_Port, sp1MOSI_M0_Pin);
+	drvpinsStruct.M1 = pin(sp1CLK_M1_GPIO_Port, sp1CLK_M1_Pin);
+	drvpinsStruct.M2 = pin(sp1NSS_M2_GPIO_Port, sp1NSS_M2_Pin);
+	drvpinsStruct.EN = pin(motorEN_GPIO_Port, motorEN_Pin);
+	drvpinsStruct.SLEEP = pin(motorSLEEP_GPIO_Port, motorSLEEP_Pin);
+	drvpinsStruct.RST = pin(sp1MISO_motorReset_GPIO_Port, sp1MISO_motorReset_Pin);
+	drvpinsStruct.FAULT = pin(motorFAULT_GPIO_Port, motorFAULT_Pin);
+	drvpinsStruct.DIR = pin(motorDIR_GPIO_Port, motorDIR_Pin);
+	drv = drv8825(drv8825::pinsStruct(), drv8825::microStepRes::Full_step);
 }
 
 /** System Clock Configuration
