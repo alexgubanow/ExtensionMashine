@@ -99,35 +99,17 @@ extern "C" void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-* @brief This function handles DMA1 channel2 global interrupt.
+* @brief This function handles EXTI line0 interrupt.
 */
-extern "C" void DMA1_Channel2_IRQHandler(void)
+extern "C" void EXTI0_IRQHandler(void)
 {
-  HAL_DMA_IRQHandler(&hdma_spi1_rx);
-}
+	/* USER CODE BEGIN EXTI0_IRQn 0 */
 
-/**
-* @brief This function handles DMA1 channel3 global interrupt.
-*/
-extern "C" void DMA1_Channel3_IRQHandler(void)
-{
-  HAL_DMA_IRQHandler(&hdma_spi1_tx);
-}
+	/* USER CODE END EXTI0_IRQn 0 */
+	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
+	/* USER CODE BEGIN EXTI0_IRQn 1 */
 
-/**
-* @brief This function handles DMA1 channel6 global interrupt.
-*/
-extern "C" void DMA1_Channel6_IRQHandler(void)
-{
-  HAL_DMA_IRQHandler(&hdma_i2c1_tx);
-}
-
-/**
-* @brief This function handles DMA1 channel7 global interrupt.
-*/
-extern "C" void DMA1_Channel7_IRQHandler(void)
-{
-  HAL_DMA_IRQHandler(&hdma_i2c1_rx);
+	/* USER CODE END EXTI0_IRQn 1 */
 }
 
 /**
@@ -135,5 +117,21 @@ extern "C" void DMA1_Channel7_IRQHandler(void)
 */
 extern "C" void USB_LP_CAN1_RX0_IRQHandler(void)
 {
-  HAL_PCD_IRQHandler(&hpcd_USB_FS);
+	HAL_PCD_IRQHandler(&hpcd_USB_FS);
+}
+
+
+/**
+* @brief This function handles EXTI line[15:10] interrupts.
+*/
+extern "C" void EXTI15_10_IRQHandler(void)
+{
+	/* USER CODE BEGIN EXTI15_10_IRQn 0 */
+
+	/* USER CODE END EXTI15_10_IRQn 0 */
+	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_10);
+	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_11);
+	/* USER CODE BEGIN EXTI15_10_IRQn 1 */
+
+	/* USER CODE END EXTI15_10_IRQn 1 */
 }

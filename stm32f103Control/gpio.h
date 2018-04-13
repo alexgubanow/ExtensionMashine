@@ -68,6 +68,35 @@
 
 void MX_GPIO_Init(void);
 
+#define motorFAULT_Pin GPIO_PIN_0
+#define motorFAULT_GPIO_Port GPIOA
+#define motorFAULT_EXTI_IRQn EXTI0_IRQn
+#define motorEN_Pin GPIO_PIN_1
+#define motorEN_GPIO_Port GPIOA
+#define motorDIR_Pin GPIO_PIN_2
+#define motorDIR_GPIO_Port GPIOA
+#define motorSLEEP_Pin GPIO_PIN_3
+#define motorSLEEP_GPIO_Port GPIOA
+#define sp1NSS_M2_Pin GPIO_PIN_4
+#define sp1NSS_M2_GPIO_Port GPIOA
+#define sp1CLK_M1_Pin GPIO_PIN_5
+#define sp1CLK_M1_GPIO_Port GPIOA
+#define sp1MISO_motorReset_Pin GPIO_PIN_6
+#define sp1MISO_motorReset_GPIO_Port GPIOA
+#define sp1MOSI_M0_Pin GPIO_PIN_7
+#define sp1MOSI_M0_GPIO_Port GPIOA
+#define endStop1_Pin GPIO_PIN_10
+#define endStop1_GPIO_Port GPIOB
+#define endStop1_EXTI_IRQn EXTI15_10_IRQn
+#define endStop2_Pin GPIO_PIN_11
+#define endStop2_GPIO_Port GPIOB
+#define endStop2_EXTI_IRQn EXTI15_10_IRQn
+#define tim1ch1_STEP_Pin GPIO_PIN_8
+#define tim1ch1_STEP_GPIO_Port GPIOA
+#define hx711CLK_Pin GPIO_PIN_6
+#define hx711CLK_GPIO_Port GPIOB
+#define hx711DAT_Pin GPIO_PIN_7
+#define hx711DAT_GPIO_Port GPIOB
 /* USER CODE BEGIN Prototypes */
 
 /* USER CODE END Prototypes */
