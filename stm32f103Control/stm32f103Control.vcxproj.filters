@@ -550,6 +550,15 @@
     <ClInclude Include="$(BSP_ROOT)\STM32F1xxxx\CMSIS_HAL\RTOS\Template\cmsis_os.h">
       <Filter>Header files\Device-specific files\HAL</Filter>
     </ClInclude>
+    <ClCompile Include="endStop.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="drv8825.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="pin.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stm32f1xx_hal_conf.h">
@@ -604,6 +613,15 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="hx711.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="endStop.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="drv8825.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="pin.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

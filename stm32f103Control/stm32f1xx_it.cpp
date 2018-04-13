@@ -2,6 +2,9 @@
 #include "stm32f1xx_hal.h"
 #include "stm32f1xx.h"
 #include "stm32f1xx_it.h"
+#include "main.h"
+#include "endStop.h"
+#include "drv8825.h"
 
 /* External variables --------------------------------------------------------*/
 extern PCD_HandleTypeDef hpcd_USB_FS;
@@ -9,6 +12,9 @@ extern DMA_HandleTypeDef hdma_i2c1_rx;
 extern DMA_HandleTypeDef hdma_i2c1_tx;
 extern DMA_HandleTypeDef hdma_spi1_rx;
 extern DMA_HandleTypeDef hdma_spi1_tx;
+extern endStop endStop1;
+extern endStop endStop2;
+extern drv8825 drv;
 
 /******************************************************************************/
 /*            Cortex-M3 Processor Interruption and Exception Handlers         */ 
@@ -106,7 +112,11 @@ extern "C" void EXTI0_IRQHandler(void)
 	/* USER CODE BEGIN EXTI0_IRQn 0 */
 
 	/* USER CODE END EXTI0_IRQn 0 */
-	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
+	if (HAL_GPIO_ReadPin(motorFAULT_GPIO_Port, motorFAULT_Pin))
+	{
+		drv.getState();
+		HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
+	}
 	/* USER CODE BEGIN EXTI0_IRQn 1 */
 
 	/* USER CODE END EXTI0_IRQn 1 */
@@ -129,8 +139,16 @@ extern "C" void EXTI15_10_IRQHandler(void)
 	/* USER CODE BEGIN EXTI15_10_IRQn 0 */
 
 	/* USER CODE END EXTI15_10_IRQn 0 */
-	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_10);
-	HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_11);
+	if (HAL_GPIO_ReadPin(endStop1_GPIO_Port, endStop1_Pin))
+	{
+		endStop1.get();
+		HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_10);
+	}
+	else if(HAL_GPIO_ReadPin(endStop2_GPIO_Port, endStop2_Pin))
+	{
+		endStop2.get();
+		HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_11);
+	}
 	/* USER CODE BEGIN EXTI15_10_IRQn 1 */
 
 	/* USER CODE END EXTI15_10_IRQn 1 */

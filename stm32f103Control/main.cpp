@@ -1,9 +1,16 @@
 #include "main.h"
 #include "comPort.h"
 #include "motorControl.h"
+#include "endStop.h"
+#include "drv8825.h"
+
 int ibuh = 0;
 comPort cP;
 motorControl mC;
+endStop endStop1 = endStop(endStop1_GPIO_Port, endStop1_Pin);
+endStop endStop2 = endStop(endStop2_GPIO_Port, endStop2_Pin);
+
+drv8825 drv;
 
 int main(void)
 {
@@ -21,6 +28,8 @@ int main(void)
 	TIM1->CCR1 = 3000;
 	for (;;)
 	{
+		endStop1.get();
+		endStop2.get();
 		if (isCOM_RX)
 		{
 			cP.parseInStr();

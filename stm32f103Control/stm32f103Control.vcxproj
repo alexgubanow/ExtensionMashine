@@ -47,7 +47,9 @@
   <ItemGroup>
     <ClCompile Include="comPort.cpp" />
     <ClCompile Include="dma.cpp" />
+    <ClCompile Include="drv8825.cpp" />
     <ClCompile Include="DWT_delays.cpp" />
+    <ClCompile Include="endStop.cpp" />
     <ClCompile Include="gpio.cpp" />
     <ClCompile Include="hx711.cpp" />
     <ClCompile Include="i2c.cpp" />
@@ -55,6 +57,7 @@
     <ClCompile Include="JSONpacker.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="motorControl.cpp" />
+    <ClCompile Include="pin.cpp" />
     <ClCompile Include="spi.cpp" />
     <ClCompile Include="stm32f1xx_it.cpp" />
     <ClCompile Include="system_stm32f1xx.c" />
@@ -220,7 +223,9 @@
   <ItemGroup>
     <ClInclude Include="comPort.h" />
     <ClInclude Include="dma.h" />
+    <ClInclude Include="drv8825.h" />
     <ClInclude Include="DWT_delays.h" />
+    <ClInclude Include="endStop.h" />
     <ClInclude Include="gpio.h" />
     <ClInclude Include="hx711.h" />
     <ClInclude Include="i2c.h" />
@@ -228,6 +233,7 @@
     <ClInclude Include="JSONpacker.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="motorControl.h" />
+    <ClInclude Include="pin.h" />
     <ClInclude Include="spi.h" />
     <ClInclude Include="stm32f1xx_hal_conf.h" />
     <ClInclude Include="stm32f1xx_it.h" />
