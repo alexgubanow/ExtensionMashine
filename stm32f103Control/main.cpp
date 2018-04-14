@@ -3,13 +3,14 @@
 #include "motorControl.h"
 #include "endStop.h"
 #include "drv8825.h"
+#include "hx711.h"
 
 int ibuh = 0;
 comPort cP;
 motorControl mC;
-endStop endStop1 = endStop(endStop1_GPIO_Port, endStop1_Pin);
-endStop endStop2 = endStop(endStop2_GPIO_Port, endStop2_Pin);
-
+endStop endStop1;
+endStop endStop2;
+hx711 hx711sd;
 drv8825 drv;
 
 int main(void)
@@ -23,9 +24,12 @@ int main(void)
 	MX_TIM1_Init();
 	//MX_SPI1_Init();
 	MX_USB_DEVICE_Init();
+	initEndStops();
 	initDrv();
+	initHX711();
+	/*drv.EnableDrv(drv8825::pinState::Enable);
 	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-	TIM1->CCR1 = 3000;
+	TIM1->CCR1 = 3000;*/
 	for (;;)
 	{
 		endStop1.get();
@@ -39,7 +43,19 @@ int main(void)
 		}
 	}
 }
+void initHX711()
+{
+	hx711::pinsStruct HX711pins;
+	HX711pins.CLK = pin(hx711CLK_GPIO_Port, hx711CLK_Pin);
+	HX711pins.DATA = pin(hx711DAT_GPIO_Port, hx711DAT_Pin);
+	hx711sd = hx711(HX711pins, 3, 0);
+}
 
+void initEndStops()
+{
+	endStop1 = endStop(endStop1_GPIO_Port, endStop1_Pin);
+	endStop2 = endStop(endStop2_GPIO_Port, endStop2_Pin);
+}
 void initDrv()
 {
 	drv8825::pinsStruct drvpinsStruct;
@@ -51,14 +67,13 @@ void initDrv()
 	drvpinsStruct.RST = pin(sp1MISO_motorReset_GPIO_Port, sp1MISO_motorReset_Pin);
 	drvpinsStruct.FAULT = pin(motorFAULT_GPIO_Port, motorFAULT_Pin);
 	drvpinsStruct.DIR = pin(motorDIR_GPIO_Port, motorDIR_Pin);
-	drv = drv8825(drv8825::pinsStruct(), drv8825::microStepRes::Full_step);
+	drv = drv8825(drvpinsStruct, drv8825::microStepRes::step1_8);
 }
 
 /** System Clock Configuration
 */
 void SystemClock_Config(void)
 {
-
 	RCC_OscInitTypeDef RCC_OscInitStruct;
 	RCC_ClkInitTypeDef RCC_ClkInitStruct;
 	RCC_PeriphCLKInitTypeDef PeriphClkInit;
@@ -74,7 +89,6 @@ void SystemClock_Config(void)
 	RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL6;
 	if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
 	{
-		
 	}
 
 	/**Initializes the CPU, AHB and APB busses clocks
@@ -88,14 +102,12 @@ void SystemClock_Config(void)
 
 	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
 	{
-		
 	}
 
 	PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USB;
 	PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLL;
 	if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
 	{
-		
 	}
 
 	/**Configure the Systick interrupt time

@@ -88,9 +88,6 @@
     <ClCompile Include="tim.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
-    <ClCompile Include="hx711.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
     <ClCompile Include="$(BSP_ROOT)\STM32F1xxxx\StartupFiles\startup_stm32f103xb.c">
       <Filter>Source files\Device-specific files</Filter>
     </ClCompile>
@@ -559,6 +556,9 @@
     <ClCompile Include="pin.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="hx711.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stm32f1xx_hal_conf.h">
@@ -612,9 +612,6 @@
     <ClInclude Include="motorControl.h">
       <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="hx711.h">
-      <Filter>Header files</Filter>
-    </ClInclude>
     <ClInclude Include="endStop.h">
       <Filter>Header files</Filter>
     </ClInclude>
@@ -622,6 +619,9 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="pin.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="hx711.h">
       <Filter>Header files</Filter>
     </ClInclude>
   </ItemGroup>

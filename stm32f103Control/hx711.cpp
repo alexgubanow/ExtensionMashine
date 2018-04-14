@@ -1,86 +1,103 @@
 #include "hx711.h"
 
+HX711::HX711()
+{
+}
 
-
-hx711::hx711()
+HX711::~HX711()
 {
 }
 
 
-hx711::~hx711()
-{
+HX711::HX711(HX711::pinsStruct pins, HX711::hx711Gain gain) {
+	_pins = pins;
+	_gain = gain;
 }
 
-void hx711::HX711_Init(HX711p data)
-{
-	GPIO_InitTypeDef GPIO_InitStruct;
-	GPIO_InitStruct.Pin = data.pinSck;
-	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-	HAL_GPIO_Init(data.gpioSck, &GPIO_InitStruct);
-
-	GPIO_InitStruct.Pin = data.pinData;
-	GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-	GPIO_InitStruct.Pull = GPIO_PULLUP;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-	HAL_GPIO_Init(data.gpioData, &GPIO_InitStruct);
-
-	HAL_GPIO_WritePin(data.gpioSck, data.pinSck, GPIO_PIN_SET);
-	HAL_Delay(50);
-	HAL_GPIO_WritePin(data.gpioData, data.pinSck, GPIO_PIN_RESET);
-
+bool HX711::is_ready() {
+	return _pins.DATA.get() == GPIO_PinState::GPIO_PIN_RESET;
 }
 
-int hx711::HX711_Value(HX711p data)
-{
-	int buffer;
-	buffer = 0;
 
-	while (HAL_GPIO_ReadPin(data.gpioData, data.pinData) == 1)
-		;
-
-	for (uint8_t i = 0; i < 24; i++)
-	{
-		HAL_GPIO_WritePin(data.gpioSck, data.pinSck, GPIO_PIN_SET);
-
-		buffer = buffer << 1;
-
-		if (HAL_GPIO_ReadPin(data.gpioData, data.pinData))
-		{
-			buffer++;
-		}
-
-		HAL_GPIO_WritePin(data.gpioSck, data.pinSck, GPIO_PIN_RESET);
+long HX711::read() {
+	// wait for the chip to become ready
+	while (!is_ready()) {
 	}
 
-	for (int i = 0; i < data.gain; i++)
-	{
-		HAL_GPIO_WritePin(data.gpioSck, data.pinSck, GPIO_PIN_SET);
-		HAL_GPIO_WritePin(data.gpioSck, data.pinSck, GPIO_PIN_RESET);
+	unsigned long value = 0;
+	uint8_t data[3] = { 0 };
+	uint8_t filler = 0x00;
+
+	// pulse the clock pin 24 times to read the data
+	//data[2] = shiftIn(DOUT, PD_SCK, MSBFIRST);
+	//data[1] = shiftIn(DOUT, PD_SCK, MSBFIRST);
+	//data[0] = shiftIn(DOUT, PD_SCK, MSBFIRST);
+
+	// set the channel and the gain factor for the next reading using the clock pin
+	for (unsigned int i = 0; i < _gain; i++) {
+		_pins.CLK.set(GPIO_PinState::GPIO_PIN_SET);
+		_pins.CLK.set(GPIO_PinState::GPIO_PIN_RESET);
 	}
 
-	buffer = buffer ^ 0x800000;
-
-	return buffer;
-}
-
-
-hx711::HX711p hx711::HX711_Tare(HX711p data, uint8_t times)
-{
-	int sum = HX711_Average_Value(data, times);
-	data.offset = sum;
-	return data;
-}
-
-int hx711::HX711_Average_Value(HX711p data, uint8_t times)
-{
-	int sum = 0;
-	for (int i = 0; i < times; i++)
-	{
-		sum += HX711_Value(data);
+	// Replicate the most significant bit to pad out a 32-bit signed integer
+	if (data[2] & 0x80) {
+		filler = 0xFF;
+	}
+	else {
+		filler = 0x00;
 	}
 
+	// Construct a 32-bit signed integer
+	value = (static_cast<unsigned long>(filler) << 24
+		| static_cast<unsigned long>(data[2]) << 16
+		| static_cast<unsigned long>(data[1]) << 8
+		| static_cast<unsigned long>(data[0]));
+
+	return static_cast<long>(value);
+}
+
+long HX711::read_average(int times) {
+	long sum = 0;
+	for (int i = 0; i < times; i++) {
+		sum += read();
+	}
 	return sum / times;
 }
 
+double HX711::get_value(int times) {
+	return read_average(times) - OFFSET;
+}
+
+float HX711::get_units(int times) {
+	return get_value(times) / SCALE;
+}
+
+void HX711::tare(int times) {
+	double sum = read_average(times);
+	set_offset(sum);
+}
+
+void HX711::set_scale(float scale) {
+	SCALE = scale;
+}
+
+float HX711::get_scale() {
+	return SCALE;
+}
+
+void HX711::set_offset(long offset) {
+	OFFSET = offset;
+}
+
+long HX711::get_offset() {
+	return OFFSET;
+}
+
+void HX711::power_down() {
+	digitalWrite(PD_SCK, LOW);
+	digitalWrite(PD_SCK, HIGH);
+}
+
+void HX711::power_up() {
+	digitalWrite(PD_SCK, LOW);
+}

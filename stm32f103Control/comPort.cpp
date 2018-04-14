@@ -1,4 +1,11 @@
 #include "comPort.h"
+#include "main.h"
+#include "endStop.h"
+#include "drv8825.h"
+#include "hx711.h"
+
+extern hx711 hx711sd;
+extern drv8825 drv;
 
 comPort::comPort()
 {
@@ -42,38 +49,24 @@ void comPort::parseInStr()
 		}
 	}
 }
-int asfds = 0;
-int rev = 0;
+//int asfds = 0;
+//int rev = 0;
 void comPort::sendAnswer()
 {
 	if (strcmp(commRx, "hx711?") == 0)
 	{
-		/*unsigned char msbRX[1] = { 0 };
-		char normStr[10];
-		snprintf(normStr, 10, "%X", msbRX[0]);
-		sendStr(commRx, "Data", (char*)normStr, Wait);*/
+		double asfds = hx711sd.Average_Value(3);
 		char normStr[10];
 		snprintf(normStr, 10, "%u", asfds);
 		sendStr(commRx, "hx711", normStr, Wait);
-		if (!rev)
-		{
-			asfds++;
-		}
-		else
-		{
-			asfds--;
-		}
-		if(asfds > 50)
-		{
-			rev = 1;
-		}
-		else if (asfds < 2)
-		{
-			rev = 0;
-		}
 	}
 	else if (strcmp(commRx, "STAT?") == 0)
 	{
+		sendStr(commRx, "status", "true", Wait);
+	}
+	else if (strcmp(commRx, "drive?") == 0)
+	{
+		drv.EnableDrv(drv8825::pinState::Enable);
 		sendStr(commRx, "status", "true", Wait);
 	}
 }

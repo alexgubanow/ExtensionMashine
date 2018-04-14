@@ -5,6 +5,7 @@
 #include "main.h"
 #include "endStop.h"
 #include "drv8825.h"
+#include "hx711.h"
 
 /* External variables --------------------------------------------------------*/
 extern PCD_HandleTypeDef hpcd_USB_FS;
@@ -15,6 +16,7 @@ extern DMA_HandleTypeDef hdma_spi1_tx;
 extern endStop endStop1;
 extern endStop endStop2;
 extern drv8825 drv;
+extern hx711 hx711sd;
 
 /******************************************************************************/
 /*            Cortex-M3 Processor Interruption and Exception Handlers         */ 

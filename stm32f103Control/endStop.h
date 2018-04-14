@@ -5,6 +5,7 @@ class endStop
 {
 public:
 	pin _pin;
+	endStop() {};
 	endStop(GPIO_TypeDef* port, unsigned short EndStopPin)
 	{
 		_pin = pin(port, EndStopPin);

@@ -10,4 +10,6 @@
 #include "tim.h"
 
 void SystemClock_Config(void);
+void initEndStops();
 void initDrv();
+void initHX711();

@@ -85,7 +85,7 @@ void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, motorEN_Pin | motorDIR_Pin | motorSLEEP_Pin | sp1NSS_M2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, motorEN_Pin | motorDIR_Pin | motorSLEEP_Pin | sp1NSS_M2_Pin | sp1MISO_motorReset_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(hx711CLK_GPIO_Port, hx711CLK_Pin, GPIO_PIN_RESET);
@@ -97,7 +97,7 @@ void MX_GPIO_Init(void)
   HAL_GPIO_Init(motorFAULT_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PAPin PAPin PAPin PAPin */
-  GPIO_InitStruct.Pin = motorEN_Pin | motorDIR_Pin | motorSLEEP_Pin | sp1NSS_M2_Pin;
+  GPIO_InitStruct.Pin = motorEN_Pin | motorDIR_Pin | motorSLEEP_Pin | sp1NSS_M2_Pin | sp1MISO_motorReset_Pin | sp1MOSI_M0_Pin | sp1CLK_M1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
