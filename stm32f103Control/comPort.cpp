@@ -6,6 +6,7 @@
 
 extern HX711 hx711sd;
 extern drv8825 drv;
+extern motorControl mC;
 
 comPort::comPort()
 {
@@ -14,7 +15,6 @@ comPort::comPort()
 comPort::~comPort()
 {
 }
-
 void comPort::parseInStr()
 {
 	UserRxBufferFS[strcspn((char*)UserRxBufferFS, "\n")] = '\0';
@@ -36,21 +36,24 @@ void comPort::parseInStr()
 				{
 					strcpy(commRx, keyString);
 				}
-				else if (strcmp(Prev_keyString, "Addr") == 0)
+				else if (strcmp(Prev_keyString, "speed") == 0)
 				{
-					strcpy(data1, keyString);
+					char buf[128];
+					strcpy(buf, keyString);
+					mC.speed = strtoul(buf, NULL, 0);
 				}
-				else if (strcmp(Prev_keyString, "Data") == 0)
+				else if (strcmp(Prev_keyString, "pos") == 0)
 				{
-					strcpy(data2, keyString);
+					char buf[128];
+					strcpy(buf, keyString);
+					mC.pos = strtoul(buf, NULL, 0);
 				}
 				strcpy(Prev_keyString, keyString);
 			}
 		}
 	}
 }
-//int asfds = 0;
-//int rev = 0;
+
 void comPort::sendAnswer()
 {
 	if (strcmp(commRx, "hx711?") == 0)
@@ -64,9 +67,19 @@ void comPort::sendAnswer()
 	{
 		sendStr(commRx, "status", "true", Wait);
 	}
-	else if (strcmp(commRx, "drive?") == 0)
+	else if (strcmp(commRx, "mRun?") == 0)
 	{
-		drv.EnableDrv(drv8825::pinState::Enable);
+		mC.Run();
+		sendStr(commRx, "status", "true", Wait);
+	}
+	else if (strcmp(commRx, "mRelease?") == 0)
+	{
+		mC.Release();
+		sendStr(commRx, "status", "true", Wait);
+	}
+	else if (strcmp(commRx, "mStop?") == 0)
+	{
+		mC.Stop();
 		sendStr(commRx, "status", "true", Wait);
 	}
 }

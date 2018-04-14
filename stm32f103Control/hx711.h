@@ -10,7 +10,7 @@ public:
 	} _pins;
 
 	long  _offset;
-	float SCALE = 1;	// used to return weight in grams, kg, ounces, whatever
+	float SCALE;	// used to return weight in grams, kg, ounces, whatever
 	// 1: channel A, gain factor 128
 	// 2: channel B, gain factor 32
 	// 3: channel A, gain factor 64

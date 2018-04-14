@@ -70,9 +70,6 @@
     <ClCompile Include="gpio.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
-    <ClCompile Include="i2c.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
@@ -586,9 +583,6 @@
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="gpio.h">
-      <Filter>Header files</Filter>
-    </ClInclude>
-    <ClInclude Include="i2c.h">
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="spi.h">

@@ -52,7 +52,6 @@
     <ClCompile Include="endStop.cpp" />
     <ClCompile Include="gpio.cpp" />
     <ClCompile Include="hx711.cpp" />
-    <ClCompile Include="i2c.cpp" />
     <ClCompile Include="jsmn.c" />
     <ClCompile Include="JSONpacker.cpp" />
     <ClCompile Include="main.cpp" />
@@ -228,7 +227,6 @@
     <ClInclude Include="endStop.h" />
     <ClInclude Include="gpio.h" />
     <ClInclude Include="hx711.h" />
-    <ClInclude Include="i2c.h" />
     <ClInclude Include="jsmn.h" />
     <ClInclude Include="JSONpacker.h" />
     <ClInclude Include="main.h" />

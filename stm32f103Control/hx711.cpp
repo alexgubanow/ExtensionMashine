@@ -17,16 +17,10 @@ HX711::HX711(HX711::pinsStruct pins, HX711::hx711Gain gain) {
 bool HX711::is_ready() {
 	return _pins.DATA.get() == GPIO_PinState::GPIO_PIN_RESET;
 }
-
-unsigned long shiftIn()
-{
-
-}
-
 long HX711::read() {
 	int buffer;
 	buffer = 0;
-	while (_pins.DATA.get() == 1)
+	while (!is_ready())
 		;
 	for (uint8_t i = 0; i < 24; i++)
 	{

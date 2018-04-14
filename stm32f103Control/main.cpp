@@ -17,21 +17,10 @@ int main(void)
 {
 	HAL_Init();
 	SystemClock_Config();
-
-	MX_GPIO_Init();
-	//MX_DMA_Init();
-	//MX_I2C1_Init();
-	MX_TIM1_Init();
-	//MX_SPI1_Init();
-	MX_USB_DEVICE_Init();
-	initEndStops();
-	initDrv();
-	initHX711();
-	/*drv.EnableDrv(drv8825::pinState::Enable);
-	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-	TIM1->CCR1 = 3000;*/
+	initPer();
 	for (;;)
 	{
+		mC.Update();
 		endStop1.get();
 		endStop2.get();
 		if (isCOM_RX)
@@ -43,14 +32,25 @@ int main(void)
 		}
 	}
 }
+void initPer()
+{
+	MX_GPIO_Init();
+	MX_TIM1_Init();
+	//MX_SPI1_Init();
+	MX_USB_DEVICE_Init();
+	initEndStops();
+	initDrv();
+	initHX711();
+	mC = motorControl();
+}
 void initHX711()
 {
 	HX711::pinsStruct HX711pins;
 	HX711pins.CLK = pin(hx711CLK_GPIO_Port, hx711CLK_Pin);
 	HX711pins.DATA = pin(hx711DAT_GPIO_Port, hx711DAT_Pin);
 	hx711sd = HX711(HX711pins, HX711::hx711Gain::_64);
-	hx711sd.tare(3);
 	hx711sd.set_scale(2000);
+	hx711sd.tare(3);
 }
 
 void initEndStops()

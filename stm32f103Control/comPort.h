@@ -22,8 +22,6 @@ public:
 	jsmntok_t tokens[16];
 
 	char commRx[128];
-	char data1[128];
-	char data2[128];
 
 	comPort();
 	~comPort();
