@@ -16,7 +16,7 @@ extern DMA_HandleTypeDef hdma_spi1_tx;
 extern endStop endStop1;
 extern endStop endStop2;
 extern drv8825 drv;
-extern hx711 hx711sd;
+extern HX711 hx711sd;
 
 /******************************************************************************/
 /*            Cortex-M3 Processor Interruption and Exception Handlers         */ 

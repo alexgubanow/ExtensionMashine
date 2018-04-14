@@ -9,15 +9,16 @@ public:
 		pin DATA;
 	} _pins;
 
-	int _offset;
+	long  _offset;
+	float SCALE = 1;	// used to return weight in grams, kg, ounces, whatever
 	// 1: channel A, gain factor 128
 	// 2: channel B, gain factor 32
 	// 3: channel A, gain factor 64
 	enum hx711Gain
 	{
 		_128 = 1,
-		_64 = 2,
-		_32 = 3
+		_64 = 3,
+		_32 = 2
 	}_gain;
 	HX711();
 	HX711(pinsStruct pins, hx711Gain gain);
@@ -25,7 +26,10 @@ public:
 	bool is_ready();
 	long read();
 	long read_average(int times);
-	double HX711::get_value(int times);
-	float HX711::get_units(int times);
+	int get_value(int times);
+	int get_units(int times);
+	void set_offset(long offset);
+	void set_scale(float scale);
+	void tare(int times);
 };
 

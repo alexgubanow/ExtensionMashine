@@ -4,7 +4,7 @@
 #include "drv8825.h"
 #include "hx711.h"
 
-extern hx711 hx711sd;
+extern HX711 hx711sd;
 extern drv8825 drv;
 
 comPort::comPort()
@@ -55,9 +55,9 @@ void comPort::sendAnswer()
 {
 	if (strcmp(commRx, "hx711?") == 0)
 	{
-		double asfds = hx711sd.Average_Value(3);
+		int asfds = hx711sd.get_units(1);
 		char normStr[10];
-		snprintf(normStr, 10, "%u", asfds);
+		snprintf(normStr, 10, "%d", asfds);
 		sendStr(commRx, "hx711", normStr, Wait);
 	}
 	else if (strcmp(commRx, "STAT?") == 0)

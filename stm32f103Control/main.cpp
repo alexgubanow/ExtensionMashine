@@ -10,7 +10,7 @@ comPort cP;
 motorControl mC;
 endStop endStop1;
 endStop endStop2;
-hx711 hx711sd;
+HX711  hx711sd;
 drv8825 drv;
 
 int main(void)
@@ -45,10 +45,12 @@ int main(void)
 }
 void initHX711()
 {
-	hx711::pinsStruct HX711pins;
+	HX711::pinsStruct HX711pins;
 	HX711pins.CLK = pin(hx711CLK_GPIO_Port, hx711CLK_Pin);
 	HX711pins.DATA = pin(hx711DAT_GPIO_Port, hx711DAT_Pin);
-	hx711sd = hx711(HX711pins, 3, 0);
+	hx711sd = HX711(HX711pins, HX711::hx711Gain::_64);
+	hx711sd.tare(3);
+	hx711sd.set_scale(2000);
 }
 
 void initEndStops()
