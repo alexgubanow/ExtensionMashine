@@ -24,14 +24,17 @@
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <local:numPowTen Clabel="massa, kg" finalValue="{Binding MainWin.massa}" />
+                        <Border Width="1" Margin="5,0,5,0" Height="20" Visibility="Visible" Background="#FFB9C9DA" />
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Velosity, m/s"/>
                             <TextBox Text="{Binding MainWin.Velosity}" Width="50"/>
                         </StackPanel>
+                        <Border Width="1" Margin="5,0,5,0" Height="20" Visibility="Visible" Background="#FFB9C9DA" />
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Distanse, m"/>
                             <TextBox Text="{Binding MainWin.Velosity}" Width="50"/>
                         </StackPanel>
+                        <Border Width="1" Margin="5,0,5,0" Height="20" Visibility="Visible" Background="#FFB9C9DA" />
                         <Button Content="Run experiment" Margin="5,5,0,0" x:Name="runExperBtn" Click="runExperBtn_Click"/>
                     </StackPanel>
                     <local:zgWPF x:Name="RAWdataPlot" graphPane="{Binding RAWdata.graphPane, Mode=TwoWay}" Height="300" />
