@@ -1,7 +1,7 @@
 using GalaSoft.MvvmLight;
-using OxyPlot;
-using OxyPlot.Series;
 using System.ComponentModel;
+using System.Windows;
+using ZedGraph;
 
 namespace controlExtension.ViewModel
 {
@@ -28,12 +28,16 @@ namespace controlExtension.ViewModel
             comPort = new comPort();
             MainBoard = new MainBoard();
             hx711 = new hx711();
+            RAWdata = new RAWdata();
+            koef = new koef();
         }
 
         public MainWin MainWin { get; set; }
         public comPort comPort { get; set; }
         public MainBoard MainBoard { get; set; }
         public hx711 hx711 { get; set; }
+        public RAWdata RAWdata { get; set; }
+        public koef koef { get; set; }
     }
 
     public class MainWin : INotifyPropertyChanged
@@ -42,27 +46,6 @@ namespace controlExtension.ViewModel
         {
             Status = "";
             chkValue = false;
-            plotViewModel = new PlotModel();
-            var s1 = new LineSeries();
-            s1.LineStyle = LineStyle.Solid;
-            s1.Color = OxyColor.FromRgb(255, 0, 0);
-            s1.RenderInLegend = false;
-            plotViewModel.Series.Add(s1);
-            //for (int j = 0; j < linearModel.timeMoments[0].Nodes.Length; j++)
-            //{
-            //    var s1 = new LineSeries();
-            //    s1.Title = "node" + j;
-            //    s1.StrokeThickness = 1.2;
-            //    s1.LineStyle = LineStyle.Solid;
-            //    s1.Color = OxyColor.FromRgb(255, 0, 0);
-            //    //s1.Color = OxyColor.FromRgb(41, 177, 255);
-            //    //s1.RenderInLegend = false;
-            //    for (int i = 0; i < counts; i++)
-            //    {
-            //        s1.Points.Add(new DataPoint(linearModel.time[i], linearModel.timeMoments[i].Nodes[j].derivatives.displ[0]));
-            //    }
-            //    plotViewModel.Series.Add(s1);
-            //}
         }
 
         private string _Status;
@@ -70,26 +53,94 @@ namespace controlExtension.ViewModel
 
         private bool _chkValue;
 
-        public bool chkValue
+        public bool chkValue { get { return _chkValue; } set { _chkValue = value; RaisePropertyChanged("chkValue"); } }
+
+        private double _massa;
+
+        public double massa { get { return _massa; } set { _massa = value; RaisePropertyChanged("massa"); } }
+
+        private int _Velosity;
+
+        public int Velosity { get { return _Velosity; } set { _Velosity = value; RaisePropertyChanged("Velosity"); } }
+
+        private int _Distanse;
+
+        public int Distanse { get { return _Distanse; } set { _Distanse = value; RaisePropertyChanged("Distanse"); } }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void RaisePropertyChanged(string propertyName)
         {
-            get { return _chkValue; }
-            set
-            {
-                _chkValue = value;
-                RaisePropertyChanged("chkValue");
-            }
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    public class RAWdata : INotifyPropertyChanged
+    {
+        public RAWdata()
+        {
+            graphPane = new GraphPane();
+            graphPane.Title.Text = "RAW data";
+            graphPane.XAxis.Title.Text = "time";
+            graphPane.YAxis.Title.Text = "Y";
+            graphPane.XAxis.Scale.FontSpec.Size = 15;
+            graphPane.YAxis.Scale.FontSpec.Size = 15;
+            graphPane.XAxis.Title.FontSpec.Size = 15;
+            graphPane.YAxis.Title.FontSpec.Size = 15;
+            graphPane.Legend.FontSpec.Size = 15;
+            graphPane.Title.FontSpec.Size = 15;
+            graphPane.IsFontsScaled = false;
+            graphPane.Border.IsVisible = false;
+            graphPane.XAxis.MajorGrid.IsZeroLine = false;
+            graphPane.YAxis.MajorGrid.IsZeroLine = false;
+            graphPane.IsBoundedRanges = false;
         }
 
-        private PlotModel _plotViewModel;
+        private GraphPane _graphPane;
 
-        public PlotModel plotViewModel
+        public GraphPane graphPane
         {
-            get => _plotViewModel;
-            set
-            {
-                _plotViewModel = value;
-                RaisePropertyChanged("plotViewModel");
-            }
+            get { return _graphPane; }
+            set { _graphPane = value; RaisePropertyChanged("graphPane"); }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void RaisePropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    public class koef : INotifyPropertyChanged
+    {
+        public koef()
+        {
+            graphPane = new GraphPane();
+            graphPane.Title.Text = "koef";
+            graphPane.XAxis.Title.Text = "time";
+            graphPane.YAxis.Title.Text = "Y";
+            graphPane.XAxis.Scale.FontSpec.Size = 15;
+            graphPane.YAxis.Scale.FontSpec.Size = 15;
+            graphPane.XAxis.Title.FontSpec.Size = 15;
+            graphPane.YAxis.Title.FontSpec.Size = 15;
+            graphPane.Legend.FontSpec.Size = 15;
+            graphPane.Title.FontSpec.Size = 15;
+            graphPane.IsFontsScaled = false;
+            graphPane.Border.IsVisible = false;
+            graphPane.XAxis.MajorGrid.IsZeroLine = false;
+            graphPane.YAxis.MajorGrid.IsZeroLine = false;
+            graphPane.IsBoundedRanges = false;
+        }
+
+        private GraphPane _graphPane;
+
+        public GraphPane graphPane
+        {
+            get { return _graphPane; }
+            set { _graphPane = value; RaisePropertyChanged("graphPane"); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -115,27 +166,17 @@ namespace controlExtension.ViewModel
 
         private bool _IsConnected;
 
-        public bool IsConnected
-        {
-            get { return _IsConnected; }
-            set { _IsConnected = value; RaisePropertyChanged("IsConnected"); }
-        }
+        public bool IsConnected { get { return _IsConnected; } set { _IsConnected = value; RaisePropertyChanged("IsConnected"); } }
+
+        public Visibility IsConnectedVis { get { return IsConnected ? Visibility.Visible : Visibility.Collapsed; } set { IsConnectedVis = (!_IsConnected ? Visibility.Visible : Visibility.Collapsed); RaisePropertyChanged("IsConnectedVis"); } }
 
         private string _IsConnectedText;
 
-        public string IsConnectedText
-        {
-            get { return _IsConnected ? "Connected" : "Disconnected"; }
-            set { _IsConnectedText = (!_IsConnected ? "Connected" : "Disconnected"); RaisePropertyChanged("IsConnectedText"); }
-        }
+        public string IsConnectedText { get { return _IsConnected ? "Connected" : "Disconnected"; } set { _IsConnectedText = (!_IsConnected ? "Connected" : "Disconnected"); RaisePropertyChanged("IsConnectedText"); } }
 
         private string _IsConnectedButtonText;
 
-        public string IsConnectedButtonText
-        {
-            get { return _IsConnected ? "Disconnect" : "Connect"; }
-            set { _IsConnectedButtonText = (!_IsConnected ? "Disconnect" : "Connect"); RaisePropertyChanged("IsConnectedButtonText"); }
-        }
+        public string IsConnectedButtonText { get { return _IsConnected ? "Disconnect" : "Connect"; } set { _IsConnectedButtonText = (!_IsConnected ? "Disconnect" : "Connect"); RaisePropertyChanged("IsConnectedButtonText"); } }
 
         private string[] _avaibleComPorts;
         public string[] avaibleComPorts { get { return _avaibleComPorts; } set { _avaibleComPorts = value; RaisePropertyChanged("avaibleComPorts"); } }

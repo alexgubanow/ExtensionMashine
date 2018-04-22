@@ -32,6 +32,7 @@ namespace controlExtension
         private MainViewModel vm;
         private SerialPort mySerialPort;
         private DispatcherTimer dispatcherTimer;
+        private Thread UpdZedThrd;
 
         public MainWindow()
         {
@@ -73,10 +74,12 @@ namespace controlExtension
                             vm.MainWin.Status = "Receive hx711 value command \"hx711?\" = " + vm.hx711.Value;
                             Dispatcher.CurrentDispatcher.Invoke(() =>
                             {
-                            (
-                                vm.MainWin.plotViewModel.Series[0] as LineSeries).Points.Add(new DataPoint(Convert.ToDouble(DateTime.Now.ToString("HHmmss")), Convert.ToDouble(vm.hx711.Value)));
-                                vm.MainWin.plotViewModel.InvalidatePlot(true);
+                            
+
                             });
+                            break;
+                        case "RAWdata":
+
                             break;
                     }
                 }
@@ -160,6 +163,7 @@ namespace controlExtension
                 }
             }
         }
+
         private void initComPort(int comPortNum)
         {
             mySerialPort = new SerialPort(vm.comPort.avaibleComPorts[comPortNum]);
@@ -170,6 +174,7 @@ namespace controlExtension
             mySerialPort.Handshake = Handshake.None;
             mySerialPort.DataReceived += new SerialDataReceivedEventHandler(DataReceivedHandler);
         }
+
         private void comPorts_ComboBox_DropDownOpened(object sender, EventArgs e)
         {
             vm.comPort.avaibleComPorts = SerialPort.GetPortNames();
@@ -188,6 +193,7 @@ namespace controlExtension
                     MessageBox.Show(ex.Message, "Error while opening");
                 }
                 vm.comPort.IsConnected = mySerialPort.IsOpen;
+                vm.comPort.RaisePropertyChanged("IsConnectedVis");
                 vm.comPort.RaisePropertyChanged("IsConnectedText");
                 vm.comPort.RaisePropertyChanged("IsConnectedButtonText");
             }
@@ -203,9 +209,9 @@ namespace controlExtension
                 }
                 vm.comPort.IsConnected = mySerialPort.IsOpen;
                 vm.MainWin.Status = "";
+                vm.comPort.RaisePropertyChanged("IsConnectedVis");
                 vm.comPort.RaisePropertyChanged("IsConnectedText");
                 vm.comPort.RaisePropertyChanged("IsConnectedButtonText");
-                //vm.comPort.RaisePropertyChanged("Status");
             }
         }
 
@@ -220,6 +226,36 @@ namespace controlExtension
         }
 
         private void btnToEnd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void saveExperBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void exportRAWbtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void exportKoefBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void runExperBtn_Click(object sender, RoutedEventArgs e)
+        {
+            //send massa
+            //send velos
+            //send dist
+            //home pos
+            //wait for Ready
+            //run
+        }
+
+        private void stopBtn_Click(object sender, RoutedEventArgs e)
         {
 
         }
