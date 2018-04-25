@@ -1,7 +1,7 @@
 using GalaSoft.MvvmLight;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Windows;
-using ZedGraph;
 
 namespace controlExtension.ViewModel
 {
@@ -30,6 +30,7 @@ namespace controlExtension.ViewModel
             hx711 = new hx711();
             RAWdata = new RAWdata();
             koef = new koef();
+            exper = new exper();
         }
 
         public MainWin MainWin { get; set; }
@@ -38,6 +39,7 @@ namespace controlExtension.ViewModel
         public hx711 hx711 { get; set; }
         public RAWdata RAWdata { get; set; }
         public koef koef { get; set; }
+        public exper exper { get; set; }
     }
 
     public class MainWin : INotifyPropertyChanged
@@ -76,127 +78,19 @@ namespace controlExtension.ViewModel
         }
     }
 
-    public class RAWdata : INotifyPropertyChanged
+    [JsonObject(MemberSerialization.OptIn)]
+    public class exper
     {
-        public RAWdata()
-        {
-            graphPane = new GraphPane();
-            graphPane.Title.Text = "RAW data";
-            graphPane.XAxis.Title.Text = "time";
-            graphPane.YAxis.Title.Text = "Y";
-            graphPane.XAxis.Scale.FontSpec.Size = 15;
-            graphPane.YAxis.Scale.FontSpec.Size = 15;
-            graphPane.XAxis.Title.FontSpec.Size = 15;
-            graphPane.YAxis.Title.FontSpec.Size = 15;
-            graphPane.Legend.FontSpec.Size = 15;
-            graphPane.Title.FontSpec.Size = 15;
-            graphPane.IsFontsScaled = false;
-            graphPane.Border.IsVisible = false;
-            graphPane.XAxis.MajorGrid.IsZeroLine = false;
-            graphPane.YAxis.MajorGrid.IsZeroLine = false;
-            graphPane.IsBoundedRanges = false;
-        }
-
-        private GraphPane _graphPane;
-
-        public GraphPane graphPane
-        {
-            get { return _graphPane; }
-            set { _graphPane = value; RaisePropertyChanged("graphPane"); }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void RaisePropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
-
-    public class koef : INotifyPropertyChanged
-    {
-        public koef()
-        {
-            graphPane = new GraphPane();
-            graphPane.Title.Text = "koef";
-            graphPane.XAxis.Title.Text = "time";
-            graphPane.YAxis.Title.Text = "Y";
-            graphPane.XAxis.Scale.FontSpec.Size = 15;
-            graphPane.YAxis.Scale.FontSpec.Size = 15;
-            graphPane.XAxis.Title.FontSpec.Size = 15;
-            graphPane.YAxis.Title.FontSpec.Size = 15;
-            graphPane.Legend.FontSpec.Size = 15;
-            graphPane.Title.FontSpec.Size = 15;
-            graphPane.IsFontsScaled = false;
-            graphPane.Border.IsVisible = false;
-            graphPane.XAxis.MajorGrid.IsZeroLine = false;
-            graphPane.YAxis.MajorGrid.IsZeroLine = false;
-            graphPane.IsBoundedRanges = false;
-        }
-
-        private GraphPane _graphPane;
-
-        public GraphPane graphPane
-        {
-            get { return _graphPane; }
-            set { _graphPane = value; RaisePropertyChanged("graphPane"); }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void RaisePropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
-
-    public class comPort : INotifyPropertyChanged
-    {
-        public comPort()
-        {
-            answer = "";
-            comm = "{\"comm\":\"STAT?\"}";
-            IsConnected = false;
-            IsConnectedText = "";
-            IsConnectedButtonText = "";
-            avaibleComPorts = new string[0];
-        }
-
-        private bool _IsConnected;
-
-        public bool IsConnected { get { return _IsConnected; } set { _IsConnected = value; RaisePropertyChanged("IsConnected"); } }
-
-        public Visibility IsConnectedVis { get { return IsConnected ? Visibility.Visible : Visibility.Collapsed; } set { IsConnectedVis = (!_IsConnected ? Visibility.Visible : Visibility.Collapsed); RaisePropertyChanged("IsConnectedVis"); } }
-
-        private string _IsConnectedText;
-
-        public string IsConnectedText { get { return _IsConnected ? "Connected" : "Disconnected"; } set { _IsConnectedText = (!_IsConnected ? "Connected" : "Disconnected"); RaisePropertyChanged("IsConnectedText"); } }
-
-        private string _IsConnectedButtonText;
-
-        public string IsConnectedButtonText { get { return _IsConnected ? "Disconnect" : "Connect"; } set { _IsConnectedButtonText = (!_IsConnected ? "Disconnect" : "Connect"); RaisePropertyChanged("IsConnectedButtonText"); } }
-
-        private string[] _avaibleComPorts;
-        public string[] avaibleComPorts { get { return _avaibleComPorts; } set { _avaibleComPorts = value; RaisePropertyChanged("avaibleComPorts"); } }
-
-        private string _currComPort;
-        public string currComPort { get { return _currComPort; } set { _currComPort = value; RaisePropertyChanged("currComPort"); } }
-
-        private string _comm;
-        public string comm { get { return _comm; } set { _comm = value; RaisePropertyChanged("comm"); } }
-
-        private string _answer;
-        public string answer { get { return _answer; } set { _answer = value; RaisePropertyChanged("answer"); } }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void RaisePropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-        }
+        [JsonProperty]
+        public double massa { get; set; }
+        [JsonProperty]
+        public double speed { get; set; }
+        [JsonProperty]
+        public double dT { get; set; }
+        [JsonProperty]
+        public List<double> rawData { get; set; }
+        [JsonProperty]
+        public List<double> miu { get; set; }
     }
 
     public class MainBoard : INotifyPropertyChanged

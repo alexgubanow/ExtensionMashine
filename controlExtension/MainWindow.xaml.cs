@@ -72,14 +72,7 @@ namespace controlExtension
                         case "hx711?":  
                             vm.hx711.Value = inJSON["hx711"].ToString();
                             vm.MainWin.Status = "Receive hx711 value command \"hx711?\" = " + vm.hx711.Value;
-                            Dispatcher.CurrentDispatcher.Invoke(() =>
-                            {
-                            
-
-                            });
-                            break;
-                        case "RAWdata":
-
+                            vm.exper.rawData.Add(Convert.ToDouble(vm.hx711.Value));
                             break;
                     }
                 }

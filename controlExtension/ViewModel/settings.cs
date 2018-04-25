@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace controlExtension.ViewModel
+namespace controlExtension
 {
     [JsonObject(MemberSerialization.OptIn)]
     class settings

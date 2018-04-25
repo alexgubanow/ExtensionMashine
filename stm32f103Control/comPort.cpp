@@ -4,9 +4,11 @@
 #include "drv8825.h"
 #include "hx711.h"
 
-extern HX711 hx711sd;
-extern drv8825 drv;
 extern motorControl mC;
+extern endStop endStop1;
+extern endStop endStop2;
+extern HX711  hx711sd;
+extern drv8825 drv;
 
 comPort::comPort()
 {
@@ -58,9 +60,8 @@ void comPort::sendAnswer()
 {
 	if (strcmp(commRx, "hx711?") == 0)
 	{
-		int asfds = hx711sd.get_units(1);
 		char normStr[10];
-		snprintf(normStr, 10, "%d", asfds);
+		snprintf(normStr, 10, "%d", hx711sd.currVal);
 		sendStr(commRx, "hx711", normStr, Wait);
 	}
 	else if (strcmp(commRx, "STAT?") == 0)
@@ -81,6 +82,13 @@ void comPort::sendAnswer()
 	{
 		mC.Stop();
 		sendStr(commRx, "status", "true", Wait);
+	}
+	else if (strcmp(commRx, "endStops?") == 0)
+	{
+		int endStopsState = endStop1.get() + endStop2.get() << 1;
+		char normStr[2];
+		snprintf(normStr, 2, "%d", endStopsState);
+		sendStr(commRx, "endStops", normStr, Wait);
 	}
 }
 

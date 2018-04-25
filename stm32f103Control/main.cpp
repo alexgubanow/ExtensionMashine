@@ -19,7 +19,8 @@ int main(void)
 	SystemClock_Config();
 	initPer();
 	for (;;)
-	{
+
+		hx711sd.currVal = hx711sd.get_units(1);
 		mC.Update();
 		endStop1.get();
 		endStop2.get();

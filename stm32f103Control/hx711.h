@@ -8,6 +8,7 @@ public:
 		pin CLK;
 		pin DATA;
 	} _pins;
+	int currVal;
 
 	long  _offset;
 	float SCALE;	// used to return weight in grams, kg, ounces, whatever
