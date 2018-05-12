@@ -5,9 +5,14 @@
 class motorControl
 {
 public:
+	enum direction
+	{
+		forward = 0,
+		backward = 1
+	};
 	unsigned long pos;
 	unsigned long long stepsToReach;
-	unsigned char Dir;
+	direction Dir;
 	unsigned short speed;
 	void Run();
 	void Stop();

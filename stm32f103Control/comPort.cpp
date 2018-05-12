@@ -50,6 +50,12 @@ void comPort::parseInStr()
 					strcpy(buf, keyString);
 					mC.pos = strtoul(buf, NULL, 0);
 				}
+				else if (strcmp(Prev_keyString, "dir") == 0)
+				{
+					char buf[128];
+					strcpy(buf, keyString);
+					mC.Dir = strtoul(buf, NULL, 0);
+				}
 				strcpy(Prev_keyString, keyString);
 			}
 		}

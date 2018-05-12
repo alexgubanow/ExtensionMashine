@@ -1,25 +1,13 @@
 ﻿using controlExtension.ViewModel;
 using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using Newtonsoft.Json.Linq;
-using OxyPlot;
-using OxyPlot.Series;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Ports;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace controlExtension
@@ -32,7 +20,9 @@ namespace controlExtension
         private MainViewModel vm;
         private SerialPort mySerialPort;
         private DispatcherTimer dispatcherTimer;
+        private Thread runExprThrd;
         private Thread UpdZedThrd;
+        private int endstopsState;
 
         public MainWindow()
         {
@@ -54,6 +44,32 @@ namespace controlExtension
             vm.comPort.avaibleComPorts = SerialPort.GetPortNames();
         }
 
+        private void ApplyEffect(Window win)
+        {
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                System.Windows.Media.Effects.BlurEffect objBlur = new System.Windows.Media.Effects.BlurEffect();
+                objBlur.Radius = 4;
+                //mngr.Visibility = Visibility.Collapsed;
+                overlayrect.Visibility = Visibility.Visible;
+                overlayring.Visibility = Visibility.Visible;
+                mainPanel.Effect = objBlur;
+                mainPanel.IsEnabled = false;
+            }));
+        }
+
+        private void ClearEffect(Window win)
+        {
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                mainPanel.IsEnabled = true;
+                mainPanel.Effect = null;
+                //mngr.Visibility = Visibility.Visible;
+                overlayrect.Visibility = Visibility.Collapsed;
+                overlayring.Visibility = Visibility.Collapsed;
+            }));
+        }
+
         private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)
         {
             if (mySerialPort.IsOpen)
@@ -69,10 +85,16 @@ namespace controlExtension
                             vm.MainBoard.Status = bool.Parse(inJSON["status"].ToString()) ? "Good" : "Bad";
                             vm.MainWin.Status = "Receive status command \"STAT?\" = " + vm.MainBoard.Status;
                             break;
-                        case "hx711?":  
+
+                        case "hx711?":
                             vm.hx711.Value = inJSON["hx711"].ToString();
                             vm.MainWin.Status = "Receive hx711 value command \"hx711?\" = " + vm.hx711.Value;
                             vm.exper.rawData.Add(Convert.ToDouble(vm.hx711.Value));
+                            break;
+
+                        case "endStops?":
+                            endstopsState = Convert.ToInt32(inJSON["endStops"]);
+                            vm.MainWin.Status = "Receive endstops State command \"endStops?\" = " + endstopsState;
                             break;
                     }
                 }
@@ -103,22 +125,18 @@ namespace controlExtension
 
         private void btn1_Click(object sender, RoutedEventArgs e)
         {
-           
         }
 
         private void btnUp_Click(object sender, RoutedEventArgs e)
         {
-            
         }
 
         private void btnDown_Click(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void btnData_Click(object sender, RoutedEventArgs e)
@@ -220,37 +238,71 @@ namespace controlExtension
 
         private void btnToEnd_Click(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void saveExperBtn_Click(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void exportRAWbtn_Click(object sender, RoutedEventArgs e)
         {
-
         }
 
         private void exportKoefBtn_Click(object sender, RoutedEventArgs e)
         {
+        }
 
+        private enum direction
+        {
+            forward = 0,
+            backward = 1
+        };
+        int ready = 0;
+        private void RunExpr()
+        {
+            if (mySerialPort.IsOpen)
+            {
+                //clear exper
+                vm.exper = new exper();
+                //home pos
+                Dispatcher.Invoke(new Action(async () =>
+                {
+                    await this.ShowMessageAsync("Wait for ready", "Are you ready?", MessageDialogStyle.Affirmative);
+                    ready = 1;
+                }));
+                while (ready == 0){}
+                ready = 0;
+                mySerialPort.WriteLine("{\"comm\":\"mRun?\",\"speed\":" + vm.MainWin.Velosity + ",\"dir\":" + direction.backward + "}");
+                vm.MainWin.Status = "Sending command \"mRun?\",\"speed\":" + vm.MainWin.Velosity + ",\"dir\":" + direction.backward + "}";
+                //wait for Ready ->show messag box
+                Dispatcher.Invoke(new Action(async () =>
+                {
+                    await this.ShowMessageAsync("Wait for ready", "Put load and click OK!", MessageDialogStyle.Affirmative);
+                    ready = 1;
+                }));
+                while (ready == 0){}
+                ready = 0;
+                vm.MainWin.SelTab = 0;
+                //run
+                mySerialPort.WriteLine("{\"comm\":\"mRun?\",\"speed\":" + vm.MainWin.Velosity + ",\"dir\":" + direction.forward + "}");
+                vm.MainWin.Status = "Sending command \"mRun?\",\"speed\":" + vm.MainWin.Velosity + ",\"dir\":" + direction.forward + "}";
+                while (endstopsState == 0)
+                {
+                    mySerialPort.WriteLine("{\"comm\":\"endStops?\"}");
+                    mySerialPort.WriteLine("{\"comm\":\"hx711?\"}");
+                }
+            }
         }
 
         private void runExperBtn_Click(object sender, RoutedEventArgs e)
         {
-            //send massa
-            //send velos
-            //send dist
-            //home pos
-            //wait for Ready
-            //run
+            vm.MainWin.SelTab = 2;
+            runExprThrd = new Thread(RunExpr);
+            runExprThrd.Start();
         }
 
         private void stopBtn_Click(object sender, RoutedEventArgs e)
         {
-
         }
     }
 }

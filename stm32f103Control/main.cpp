@@ -33,6 +33,7 @@ int main(void)
 		}
 	}
 }
+
 void initPer()
 {
 	MX_GPIO_Init();

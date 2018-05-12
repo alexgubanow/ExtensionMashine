@@ -93,8 +93,12 @@
       <DependentUpon>numPowTen.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\comPort.cs" />
+    <Compile Include="ViewModel\exper.cs" />
+    <Compile Include="ViewModel\hx711.cs" />
     <Compile Include="ViewModel\koef.cs" />
+    <Compile Include="ViewModel\MainBoard.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MainWin.cs" />
     <Compile Include="ViewModel\RAWdata.cs" />
     <Compile Include="ViewModel\settings.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />

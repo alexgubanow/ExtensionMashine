@@ -7,100 +7,122 @@
                       xmlns:local="clr-namespace:controlExtension"
                       mc:Ignorable="d"
                       Title="Control extension mashine" Height="800" Width="800" BorderBrush="Gray" BorderThickness="1"
-                      DataContext="{Binding Main, Source={StaticResource Locator}}" >
-    <DockPanel LastChildFill="True">
-        <StatusBar DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Height="26">
-            <StatusBarItem>
-                <TextBlock Name="status" Text="{Binding comPort.IsConnectedText}"/>
-            </StatusBarItem>
-            <StatusBarItem>
-                <TextBlock Name="boardStatus" Text="{Binding MainBoard.Status}"/>
-            </StatusBarItem>
-        </StatusBar>
-        <Button DockPanel.Dock="Top" Content="Stop" Margin="5,5,0,0" x:Name="stopBtn" Click="stopBtn_Click"
-                Background="Red" Visibility="{Binding comPort.IsConnectedVis}"/>
-        <TabControl>
-            <TabItem Header="Experiment">
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <local:numPowTen Clabel="massa, kg" finalValue="{Binding MainWin.massa}" />
-                        <Border Width="1" Margin="5,0,5,0" Height="20" Visibility="Visible" Background="#FFB9C9DA" />
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Velosity, m/s"/>
-                            <TextBox Text="{Binding MainWin.Velosity}" Width="50"/>
-                        </StackPanel>
-                        <Border Width="1" Margin="5,0,5,0" Height="20" Visibility="Visible" Background="#FFB9C9DA" />
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Distanse, m"/>
-                            <TextBox Text="{Binding MainWin.Velosity}" Width="50"/>
-                        </StackPanel>
-                        <Border Width="1" Margin="5,0,5,0" Height="20" Visibility="Visible" Background="#FFB9C9DA" />
-                        <Button Content="Run experiment" Margin="5,5,0,0" x:Name="runExperBtn" Click="runExperBtn_Click"/>
-                    </StackPanel>
-                    <local:zgWPF x:Name="RAWdataPlot" graphPane="{Binding RAWdata.graphPane, Mode=TwoWay}" Height="300" />
-                    <local:zgWPF x:Name="koefPlot" graphPane="{Binding koef.graphPane, Mode=TwoWay}"  Height="300"/>
-                    <StackPanel Orientation="Horizontal">
-                        <Button Content="Save experiment" Margin="5,5,0,0" x:Name="saveExperBtn" Click="saveExperBtn_Click"/>
-                        <Button Content="Export RAW graph" Margin="5,5,0,0" x:Name="exportRAWbtn" Click="exportRAWbtn_Click"/>
-                        <Button Content="Export koef graph" Margin="5,5,0,0" x:Name="exportKoefBtn" Click="exportKoefBtn_Click"/>
-                    </StackPanel>
-                </StackPanel>
-            </TabItem>
-            <TabItem Header="Settings">
-                <StackPanel>
-                    <GroupBox Header="hx711">
-                        <StackPanel>
-                            <StackPanel VerticalAlignment="Bottom" Margin="5,5,0,0">
-                                <Label Content="Sensor data" />
-                                <TextBox x:Name="txt1" Text="{Binding hx711.Value}"
-                 Width="200" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Margin="5,5,0,0" VerticalAlignment="Bottom">
-                                <Button Content="Get" x:Name="btnData" Width="75" Click="btnData_Click"
-                            Height="20" Margin="5,5,0,0" IsEnabled="{Binding  comPort.IsConnected}"/>
-                                <CheckBox Content="auto" VerticalAlignment="Center" Margin="5,5,0,0"
-                              IsChecked="{Binding MainWin.chkValue}" IsEnabled="{Binding  comPort.IsConnected}"
-                          x:Name="autoGetCheckBox" Checked="autoGetCheckBox_Checked"
-                          Unchecked="autoGetCheckBox_Checked" />
+                      DataContext="{Binding Main, Source={StaticResource Locator}}">
+    <Grid>
+        <Controls:ProgressRing IsActive="True" Panel.ZIndex="10001" x:Name="overlayring"
+                               Foreground="White" Visibility="Collapsed" />
+        <DockPanel LastChildFill="True" x:Name="mainPanel">
+            <Rectangle Panel.ZIndex="10000" x:Name="overlayrect" Fill="DarkGray" Opacity=".5"
+                   Visibility="Collapsed" />
+            <StatusBar DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Height="26">
+                <StatusBarItem>
+                    <TextBlock Name="status" Text="{Binding comPort.IsConnectedText}" />
+                </StatusBarItem>
+                <StatusBarItem>
+                    <TextBlock Name="boardStatus" Text="{Binding MainBoard.Status}" />
+                </StatusBarItem>
+            </StatusBar>
+            <Button DockPanel.Dock="Top" Content="Stop" Margin="5,5,0,0" x:Name="stopBtn" Click="stopBtn_Click"
+                Background="Red" Visibility="{Binding comPort.IsConnectedVis}" />
+            <TabControl x:Name="tabCntrl" SelectedIndex="{Binding MainWin.SelTab, Mode=TwoWay}">
+                <TabItem Header="Experiment">
+                    <DockPanel>
+                        <StackPanel DockPanel.Dock="Top">
+                            <GroupBox Header="Initial settings">
+                                <StackPanel Orientation="Horizontal">
+                                    <local:numPowTen Clabel="massa, kg" finalValue="{Binding MainWin.massa}" />
+                                    <Border Width="1" Margin="5,0,0,0" Height="20" Visibility="Visible" Background="#FFB9C9DA" />
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Velosity, m/s" />
+                                        <TextBox Text="{Binding MainWin.Velosity}" Width="50" />
+                                    </StackPanel>
+                                    <Border Width="1" Margin="5,0,5,0" Height="20" Visibility="Visible" Background="#FFB9C9DA" />
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Distanse, m" />
+                                        <TextBox Text="{Binding MainWin.Velosity}" Width="50" />
+                                    </StackPanel>
+                                    <Border Width="1" Margin="5,0,5,0" Height="20" Visibility="Visible" Background="#FFB9C9DA" />
+                                </StackPanel>
+                            </GroupBox>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                <Button Content="Run experiment" Margin="5,5,0,0" x:Name="runExperBtn" 
+                                        Click="runExperBtn_Click" IsEnabled="{Binding comPort.IsConnected}" />
+                                <Button Content="Save experiment" Margin="5,5,0,0" x:Name="saveExperBtn"
+                                        Click="saveExperBtn_Click" IsEnabled="{Binding comPort.IsConnected}" />
+                                <Button Content="Export RAW graph" Margin="5,5,0,0" x:Name="exportRAWbtn"
+                                        Click="exportRAWbtn_Click" IsEnabled="{Binding comPort.IsConnected}" />
+                                <Button Content="Export koef graph" Margin="5,5,0,0" x:Name="exportKoefBtn"
+                                        Click="exportKoefBtn_Click" IsEnabled="{Binding comPort.IsConnected}" />
                             </StackPanel>
                         </StackPanel>
-                    </GroupBox>
-                    <GroupBox Header="motor control" Margin="0,5,0,0" >
-                        <StackPanel Margin="5,5,0,0">
-                            <StackPanel Orientation="Horizontal">
-                                <Button Grid.Column="2" Content="Home" Height="20" Margin="5,5,0,0"
-                x:Name="btnHome" Width="75" Click="btn1_Click" IsEnabled="{Binding  comPort.IsConnected}"/>
-                                <Button Grid.Column="2" Content="Up"  Height="20" Margin="5,5,0,0"
-                x:Name="btnUp" Width="75" Click="btnUp_Click" IsEnabled="{Binding  comPort.IsConnected}"/>
-                                <Button Grid.Column="2" Content="Down" Height="20" Margin="5,5,0,0"
-                x:Name="btnDown" Width="75" Click="btnDown_Click" IsEnabled="{Binding  comPort.IsConnected}"/>
-                                <Button Grid.Column="2" Content="To End" Height="20" Margin="5,5,0,0"
-                x:Name="btnToEnd" Width="75" Click="btnToEnd_Click" IsEnabled="{Binding  comPort.IsConnected}"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </GroupBox>
-                    <GroupBox Header="Comport" Margin="0,5,0,0">
-                        <StackPanel>
-                            <StackPanel Orientation="Horizontal" Margin="5,5,0,0">
-                                <Label Margin="5,5,0,0" Content="COM port:" />
-                                <ComboBox Margin="5,5,0,0" x:Name="comPorts_ComboBox" Width="115" VerticalAlignment="Center"
+                        <GroupBox Header="Comport" DockPanel.Dock="Bottom">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Margin="0,5,0,0" Content="COM port:" />
+                                    <ComboBox Margin="5,5,0,0" x:Name="comPorts_ComboBox" Width="115" VerticalAlignment="Center"
                           ItemsSource="{Binding  comPort.avaibleComPorts}"
                       SelectionChanged="comPorts_ComboBox_SelectionChanged"
                           DropDownOpened="comPorts_ComboBox_DropDownOpened" />
-                                <Button Margin="5,5,0,0" x:Name="btnConnect" Width="80" Click="btnConnect_Click"
+                                    <Button Margin="5,5,0,0" x:Name="btnConnect" Width="80" Click="btnConnect_Click"
                     Content="{Binding  comPort.IsConnectedButtonText}" />
-                                <Label Margin="5,5,0,0" Content="Command:" />
-                                <TextBox x:Name="command" Text="{Binding comPort.comm}" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Center"
+                                    <Label Margin="5,5,0,0" Content="Command:" />
+                                    <TextBox x:Name="command" Text="{Binding comPort.comm}" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Center"
                          Width="110" IsEnabled="{Binding  comPort.IsConnected}" />
-                                <Button Margin="5,5,0,0" x:Name="sendButton" Content="Send" Width="80" Click="sendButton_Click"
+                                    <Button Margin="5,5,0,0" x:Name="sendButton" Content="Send" Width="80" Click="sendButton_Click"
                         IsEnabled="{Binding  comPort.IsConnected}" />
-                                <TextBox x:Name="reply" Text="{Binding comPort.answer}" Width="200" Margin="5,5,0,0"
-                         VerticalAlignment="Center" IsEnabled="{Binding  comPort.IsConnected}" />
+                                    <TextBox x:Name="reply" Text="{Binding comPort.answer}" Width="200" Margin="5,5,0,0"
+                         VerticalAlignment="Center" IsEnabled="{Binding comPort.IsConnected}" />
+                                </StackPanel>
                             </StackPanel>
-                        </StackPanel>
-                    </GroupBox>
-                </StackPanel>
-            </TabItem>
-        </TabControl>
-    </DockPanel>
+                        </GroupBox>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="250*" />
+                                <RowDefinition Height="250*" />
+                            </Grid.RowDefinitions>
+                            <local:zgWPF Grid.Row="0" x:Name="RAWdataPlot" graphPane="{Binding RAWdata.graphPane, Mode=TwoWay}"/>
+                            <local:zgWPF Grid.Row="1" x:Name="koefPlot" graphPane="{Binding koef.graphPane, Mode=TwoWay}"/>
+                        </Grid>
+                    </DockPanel>
+                </TabItem>
+                <TabItem Header="Settings">
+                    <StackPanel>
+                        <GroupBox Header="hx711">
+                            <StackPanel>
+                                <StackPanel VerticalAlignment="Bottom" Margin="5,5,0,0">
+                                    <Label Content="Sensor data" />
+                                    <TextBox x:Name="txt1" Text="{Binding hx711.Value}"
+                 Width="200" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="5,5,0,0" VerticalAlignment="Bottom">
+                                    <Button Content="Get" x:Name="btnData" Width="75" Click="btnData_Click"
+                            Height="20" Margin="5,5,0,0" IsEnabled="{Binding  comPort.IsConnected}" />
+                                    <CheckBox Content="auto" VerticalAlignment="Center" Margin="5,5,0,0"
+                              IsChecked="{Binding MainWin.chkValue}" IsEnabled="{Binding  comPort.IsConnected}"
+                          x:Name="autoGetCheckBox" Checked="autoGetCheckBox_Checked"
+                          Unchecked="autoGetCheckBox_Checked" />
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+                        <GroupBox Header="motor control" Margin="0,5,0,0">
+                            <StackPanel Margin="5,5,0,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Grid.Column="2" Content="Home" Height="20" Margin="5,5,0,0"
+                x:Name="btnHome" Width="75" Click="btn1_Click" IsEnabled="{Binding  comPort.IsConnected}" />
+                                    <Button Grid.Column="2" Content="Up"  Height="20" Margin="5,5,0,0"
+                x:Name="btnUp" Width="75" Click="btnUp_Click" IsEnabled="{Binding  comPort.IsConnected}" />
+                                    <Button Grid.Column="2" Content="Down" Height="20" Margin="5,5,0,0"
+                x:Name="btnDown" Width="75" Click="btnDown_Click" IsEnabled="{Binding  comPort.IsConnected}" />
+                                    <Button Grid.Column="2" Content="To End" Height="20" Margin="5,5,0,0"
+                x:Name="btnToEnd" Width="75" Click="btnToEnd_Click" IsEnabled="{Binding  comPort.IsConnected}" />
+                                </StackPanel>
+                            </StackPanel>
+                        </GroupBox>
+                    </StackPanel>
+                </TabItem>
+                <TabItem>
+                </TabItem>
+            </TabControl>
+        </DockPanel>
+    </Grid>
 </Controls:MetroWindow>
