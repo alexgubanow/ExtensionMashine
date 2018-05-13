@@ -109,7 +109,9 @@
                             </StackPanel>
                         </GroupBox>
                         <GroupBox Header="motor control" Margin="0,5,0,0">
-                            <StackPanel Margin="5,5,0,0">
+                            <StackPanel>
+                                <ComboBox Height="20" Margin="5,5,0,0" HorizontalAlignment="Left" Width="100"
+                                          IsEnabled="{Binding comPort.IsConnected}"/>
                                 <StackPanel Orientation="Horizontal">
                                     <Button Grid.Column="2" Content="Home" Height="20" Margin="5,5,0,0"
                 x:Name="btnHome" Width="75" Click="btn1_Click" IsEnabled="{Binding  comPort.IsConnected}" />

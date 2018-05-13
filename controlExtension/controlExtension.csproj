@@ -93,6 +93,7 @@
     <Compile Include="numPowTen.xaml.cs">
       <DependentUpon>numPowTen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UART.cs" />
     <Compile Include="ViewModel\comPort.cs" />
     <Compile Include="ViewModel\exper.cs" />
     <Compile Include="ViewModel\hx711.cs" />
