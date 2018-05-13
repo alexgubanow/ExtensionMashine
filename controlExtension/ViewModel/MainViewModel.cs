@@ -23,19 +23,17 @@ namespace controlExtension.ViewModel
         {
             MainWin = new MainWin();
             comPort = new comPort();
-            MainBoard = new MainBoard();
             hx711 = new hx711();
             RAWdata = new RAWdata();
-            koef = new koef();
+            miu = new miu();
             exper = new exper();
         }
 
         public MainWin MainWin { get; set; }
         public comPort comPort { get; set; }
-        public MainBoard MainBoard { get; set; }
         public hx711 hx711 { get; set; }
         public RAWdata RAWdata { get; set; }
-        public koef koef { get; set; }
+        public miu miu { get; set; }
         public exper exper { get; set; }
     }
 }

@@ -3,12 +3,12 @@ using ZedGraph;
 
 namespace controlExtension.ViewModel
 {
-    public class koef : INotifyPropertyChanged
+    public class miu : INotifyPropertyChanged
     {
-        public koef()
+        public miu()
         {
             graphPane = new GraphPane();
-            graphPane.Title.Text = "koef";
+            graphPane.Title.Text = "miu";
             graphPane.XAxis.Title.Text = "time";
             graphPane.YAxis.Title.Text = "Y";
             graphPane.XAxis.Scale.FontSpec.Size = 15;

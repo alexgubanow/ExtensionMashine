@@ -2,103 +2,48 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source files">
-      <UniqueIdentifier>{b006b9ea-c310-4814-a202-181c766e189f}</UniqueIdentifier>
+      <UniqueIdentifier>{01f8049b-fef9-461d-b7b0-f108b12b68b9}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
     <Filter Include="Header files">
-      <UniqueIdentifier>{086925e5-efe6-419e-b700-8e2406202c4c}</UniqueIdentifier>
+      <UniqueIdentifier>{ed1d9ad3-1f84-42d3-b10b-a2f016eb2338}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
     <Filter Include="Resource files">
-      <UniqueIdentifier>{a8d33381-2d9e-42bd-8792-995e856ad69d}</UniqueIdentifier>
+      <UniqueIdentifier>{b6dcf298-a4c6-4bc4-a911-8be98d788e39}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
-    <Filter Include="VisualGDB settings">
-      <UniqueIdentifier>{894d825a-d914-49d8-8981-a01187806338}</UniqueIdentifier>
-      <Extensions>*.vgdbsettings</Extensions>
-    </Filter>
     <Filter Include="Source files\Device-specific files">
-      <UniqueIdentifier>{23ebd75c-fac0-48db-99f7-09bd17a61eee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header files\Device-specific files">
-      <UniqueIdentifier>{2c400430-1bb0-41d9-a1c0-2dc1d58e440a}</UniqueIdentifier>
+      <UniqueIdentifier>{7dce0560-daca-4c98-859f-d0efb548e8ba}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source files\Device-specific files\HAL">
-      <UniqueIdentifier>{86aa7237-0f21-45c4-8279-dc5f81773072}</UniqueIdentifier>
+      <UniqueIdentifier>{afd1eac5-eb6e-4e14-81db-a1328173ab6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header files\Device-specific files">
+      <UniqueIdentifier>{f4da7b15-3447-42e2-b381-75bb2b52be7e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header files\Device-specific files\HAL">
-      <UniqueIdentifier>{caf3878a-577c-440c-9dca-210a2d17e530}</UniqueIdentifier>
+      <UniqueIdentifier>{6057c372-91c5-4d28-907c-657572cf21eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="VisualGDB settings">
+      <UniqueIdentifier>{fb26ef12-ad17-4e73-b8c4-721857a5e94e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source files\Device-specific files\USB Device">
-      <UniqueIdentifier>{6fd0c66d-5c4d-407f-af2a-e569a059e1d7}</UniqueIdentifier>
+      <UniqueIdentifier>{741c30f3-7b3c-4e04-af09-ce26c0c96540}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header files\Device-specific files\USB Device">
-      <UniqueIdentifier>{852d9a9c-525e-43f8-8479-e68ef9428672}</UniqueIdentifier>
+      <UniqueIdentifier>{d81d8c37-d821-423d-86d4-aecb7a404ff2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="system_stm32f1xx.c">
       <Filter>Source files</Filter>
     </ClCompile>
-    <ClCompile Include="usbd_cdc_if.c">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="usbd_conf.c">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="usb_device.c">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="usbd_desc.c">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="comPort.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="DWT_delays.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="jsmn.c">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="JSONpacker.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="dma.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="gpio.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="motorControl.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="spi.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="stm32f1xx_it.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
-    <ClCompile Include="tim.cpp">
-      <Filter>Source files</Filter>
-    </ClCompile>
+    <None Include="stm32.props">
+      <Filter>Source files\Device-specific files</Filter>
+    </None>
     <ClCompile Include="$(BSP_ROOT)\STM32F1xxxx\StartupFiles\startup_stm32f103xb.c">
       <Filter>Source files\Device-specific files</Filter>
-    </ClCompile>
-    <ClCompile Include="$(BSP_ROOT)\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c">
-      <Filter>Source files\Device-specific files\USB Device</Filter>
-    </ClCompile>
-    <ClCompile Include="$(BSP_ROOT)\STM32_USB_Device_Library\Core\Src\usbd_core.c">
-      <Filter>Source files\Device-specific files\USB Device</Filter>
-    </ClCompile>
-    <ClCompile Include="$(BSP_ROOT)\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c">
-      <Filter>Source files\Device-specific files\USB Device</Filter>
-    </ClCompile>
-    <ClCompile Include="$(BSP_ROOT)\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c">
-      <Filter>Source files\Device-specific files\USB Device</Filter>
     </ClCompile>
     <ClCompile Include="$(BSP_ROOT)\STM32F1xxxx\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.c">
       <Filter>Source files\Device-specific files\HAL</Filter>
@@ -274,20 +219,8 @@
     <ClCompile Include="$(BSP_ROOT)\STM32F1xxxx\STM32F1xx_HAL_Driver\Src\stm32f1xx_ll_utils.c">
       <Filter>Source files\Device-specific files\HAL</Filter>
     </ClCompile>
-    <ClInclude Include="$(BSP_ROOT)\STM32_USB_Device_Library\Class\CDC\Inc\usbd_cdc.h">
-      <Filter>Header files\Device-specific files\USB Device</Filter>
-    </ClInclude>
-    <ClInclude Include="$(BSP_ROOT)\STM32_USB_Device_Library\Core\Inc\usbd_core.h">
-      <Filter>Header files\Device-specific files\USB Device</Filter>
-    </ClInclude>
-    <ClInclude Include="$(BSP_ROOT)\STM32_USB_Device_Library\Core\Inc\usbd_ctlreq.h">
-      <Filter>Header files\Device-specific files\USB Device</Filter>
-    </ClInclude>
-    <ClInclude Include="$(BSP_ROOT)\STM32_USB_Device_Library\Core\Inc\usbd_def.h">
-      <Filter>Header files\Device-specific files\USB Device</Filter>
-    </ClInclude>
-    <ClInclude Include="$(BSP_ROOT)\STM32_USB_Device_Library\Core\Inc\usbd_ioreq.h">
-      <Filter>Header files\Device-specific files\USB Device</Filter>
+    <ClInclude Include="stm32f1xx_hal_conf.h">
+      <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="$(BSP_ROOT)\STM32F1xxxx\STM32F1xx_HAL_Driver\Inc\stm32f1xx_hal.h">
       <Filter>Header files\Device-specific files\HAL</Filter>
@@ -544,57 +477,120 @@
     <ClInclude Include="$(BSP_ROOT)\STM32F1xxxx\CMSIS_HAL\RTOS\Template\cmsis_os.h">
       <Filter>Header files\Device-specific files\HAL</Filter>
     </ClInclude>
-    <ClCompile Include="endStop.cpp">
+    <None Include="stm32f103Control-Debug.vgdbsettings">
+      <Filter>VisualGDB settings</Filter>
+    </None>
+    <None Include="stm32f103Control-Release.vgdbsettings">
+      <Filter>VisualGDB settings</Filter>
+    </None>
+    <None Include="stm32.xml">
+      <Filter>VisualGDB settings</Filter>
+    </None>
+    <ClCompile Include="comPort.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="dma.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
     <ClCompile Include="drv8825.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
-    <ClCompile Include="pin.cpp">
+    <ClCompile Include="DWT_delays.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="endStop.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="gpio.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
     <ClCompile Include="hx711.cpp">
       <Filter>Source files</Filter>
     </ClCompile>
+    <ClCompile Include="jsmn.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="JSONpacker.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="motorControl.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="pin.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="spi.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="stm32f1xx_it.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="tim.cpp">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="usb_device.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="usbd_cdc_if.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="usbd_conf.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="usbd_desc.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="$(BSP_ROOT)\STM32_USB_Device_Library\Class\CDC\Src\usbd_cdc.c">
+      <Filter>Source files\Device-specific files\USB Device</Filter>
+    </ClCompile>
+    <ClCompile Include="$(BSP_ROOT)\STM32_USB_Device_Library\Core\Src\usbd_core.c">
+      <Filter>Source files\Device-specific files\USB Device</Filter>
+    </ClCompile>
+    <ClCompile Include="$(BSP_ROOT)\STM32_USB_Device_Library\Core\Src\usbd_ctlreq.c">
+      <Filter>Source files\Device-specific files\USB Device</Filter>
+    </ClCompile>
+    <ClCompile Include="$(BSP_ROOT)\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c">
+      <Filter>Source files\Device-specific files\USB Device</Filter>
+    </ClCompile>
+    <ClInclude Include="$(BSP_ROOT)\STM32_USB_Device_Library\Class\CDC\Inc\usbd_cdc.h">
+      <Filter>Header files\Device-specific files\USB Device</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\STM32_USB_Device_Library\Core\Inc\usbd_core.h">
+      <Filter>Header files\Device-specific files\USB Device</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\STM32_USB_Device_Library\Core\Inc\usbd_ctlreq.h">
+      <Filter>Header files\Device-specific files\USB Device</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\STM32_USB_Device_Library\Core\Inc\usbd_def.h">
+      <Filter>Header files\Device-specific files\USB Device</Filter>
+    </ClInclude>
+    <ClInclude Include="$(BSP_ROOT)\STM32_USB_Device_Library\Core\Inc\usbd_ioreq.h">
+      <Filter>Header files\Device-specific files\USB Device</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stm32f1xx_hal_conf.h">
-      <Filter>Header files</Filter>
-    </ClInclude>
-    <ClInclude Include="usbd_cdc_if.h">
-      <Filter>Header files</Filter>
-    </ClInclude>
-    <ClInclude Include="usbd_conf.h">
-      <Filter>Header files</Filter>
-    </ClInclude>
-    <ClInclude Include="usb_device.h">
-      <Filter>Header files</Filter>
-    </ClInclude>
-    <ClInclude Include="usbd_desc.h">
-      <Filter>Header files</Filter>
-    </ClInclude>
-    <ClInclude Include="main.h">
-      <Filter>Header files</Filter>
-    </ClInclude>
-    <ClInclude Include="stm32f1xx_it.h">
+    <ClInclude Include="comPort.h">
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="dma.h">
       <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="gpio.h">
-      <Filter>Header files</Filter>
-    </ClInclude>
-    <ClInclude Include="spi.h">
-      <Filter>Header files</Filter>
-    </ClInclude>
-    <ClInclude Include="tim.h">
-      <Filter>Header files</Filter>
-    </ClInclude>
-    <ClInclude Include="comPort.h">
+    <ClInclude Include="drv8825.h">
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="DWT_delays.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="endStop.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="gpio.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="hx711.h">
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="jsmn.h">
@@ -603,36 +599,35 @@
     <ClInclude Include="JSONpacker.h">
       <Filter>Header files</Filter>
     </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
     <ClInclude Include="motorControl.h">
-      <Filter>Header files</Filter>
-    </ClInclude>
-    <ClInclude Include="endStop.h">
-      <Filter>Header files</Filter>
-    </ClInclude>
-    <ClInclude Include="drv8825.h">
       <Filter>Header files</Filter>
     </ClInclude>
     <ClInclude Include="pin.h">
       <Filter>Header files</Filter>
     </ClInclude>
-    <ClInclude Include="hx711.h">
+    <ClInclude Include="spi.h">
       <Filter>Header files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="stm32f103Control-Debug.vgdbsettings">
-      <Filter>VisualGDB settings</Filter>
-    </None>
-    <None Include="stm32f103Control-Release.vgdbsettings">
-      <Filter>VisualGDB settings</Filter>
-    </None>
-    <None Include="stm32.props">
-      <Filter>Source files\Device-specific files</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Xml Include="stm32.xml">
-      <Filter>VisualGDB settings</Filter>
-    </Xml>
+    <ClInclude Include="stm32f1xx_it.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="tim.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="usb_device.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="usbd_cdc_if.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="usbd_conf.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
+    <ClInclude Include="usbd_desc.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

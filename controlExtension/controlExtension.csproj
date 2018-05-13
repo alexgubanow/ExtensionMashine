@@ -63,6 +63,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -95,8 +96,7 @@
     <Compile Include="ViewModel\comPort.cs" />
     <Compile Include="ViewModel\exper.cs" />
     <Compile Include="ViewModel\hx711.cs" />
-    <Compile Include="ViewModel\koef.cs" />
-    <Compile Include="ViewModel\MainBoard.cs" />
+    <Compile Include="ViewModel\miu.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MainWin.cs" />
     <Compile Include="ViewModel\RAWdata.cs" />

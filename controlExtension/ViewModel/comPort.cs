@@ -8,7 +8,7 @@ namespace controlExtension.ViewModel
         public comPort()
         {
             answer = "";
-            comm = "{\"comm\":\"STAT?\"}";
+            comm = "{\"Comm\":\"STAT?\"}";
             IsConnected = false;
             IsConnectedText = "";
             IsConnectedButtonText = "";

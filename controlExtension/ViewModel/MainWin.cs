@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Windows;
 
 namespace controlExtension.ViewModel
 {
@@ -8,6 +9,7 @@ namespace controlExtension.ViewModel
         {
             Status = "";
             chkValue = false;
+            VisPlot = Visibility.Visible;
         }
 
         private string _Status;
@@ -29,9 +31,9 @@ namespace controlExtension.ViewModel
 
         public int Distanse { get { return _Distanse; } set { _Distanse = value; RaisePropertyChanged("Distanse"); } }
 
-        private int _SelTab;
+        private Visibility _VisPlot;
 
-        public int SelTab { get { return _SelTab; } set { _SelTab = value; RaisePropertyChanged("SelTab"); } }
+        public Visibility VisPlot { get { return _VisPlot; } set { _VisPlot = value; RaisePropertyChanged("VisPlot"); } }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

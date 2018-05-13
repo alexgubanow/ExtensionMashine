@@ -6,8 +6,8 @@ extern USBD_CDC_ItfTypeDef  USBD_Interface_fops_FS;
 uint8_t CDC_Transmit_FS(uint8_t* Buf, uint16_t Len);
 /* Define size for the receive and transmit buffer over CDC */
 /* It's up to user to redefine and/or remove those define */
-#define APP_RX_DATA_SIZE  2048
-#define APP_TX_DATA_SIZE  2048
+#define APP_RX_DATA_SIZE  1024
+#define APP_TX_DATA_SIZE  1024
 
 /** @defgroup USBD_CDC_Private_Variables
 * @{

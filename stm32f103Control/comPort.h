@@ -21,7 +21,7 @@ public:
 	jsmn_parser p;
 	jsmntok_t tokens[16];
 
-	char commRx[128];
+	char Comm[128];
 
 	comPort();
 	~comPort();

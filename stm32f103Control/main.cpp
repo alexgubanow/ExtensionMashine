@@ -13,17 +13,21 @@ endStop endStop2;
 HX711  hx711sd;
 drv8825 drv;
 
+int first;
+int second;
+
 int main(void)
 {
 	HAL_Init();
 	SystemClock_Config();
 	initPer();
 	for (;;)
-
-		hx711sd.currVal = hx711sd.get_units(1);
-		mC.Update();
-		endStop1.get();
-		endStop2.get();
+	{
+		if(endStop1.get() + endStop2.get() != 0)
+		{
+			mC.speed = 0;
+			mC.Update();
+		}
 		if (isCOM_RX)
 		{
 			cP.parseInStr();

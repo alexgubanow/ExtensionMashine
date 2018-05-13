@@ -19,12 +19,12 @@
                     <TextBlock Name="status" Text="{Binding comPort.IsConnectedText}" />
                 </StatusBarItem>
                 <StatusBarItem>
-                    <TextBlock Name="boardStatus" Text="{Binding MainBoard.Status}" />
+                    <TextBlock Name="boardStatus" Text="{Binding MainWin.Status}" />
                 </StatusBarItem>
             </StatusBar>
             <Button DockPanel.Dock="Top" Content="Stop" Margin="5,5,0,0" x:Name="stopBtn" Click="stopBtn_Click"
                 Background="Red" Visibility="{Binding comPort.IsConnectedVis}" />
-            <TabControl x:Name="tabCntrl" SelectedIndex="{Binding MainWin.SelTab, Mode=TwoWay}">
+            <TabControl x:Name="tabCntrl">
                 <TabItem Header="Experiment">
                     <DockPanel>
                         <StackPanel DockPanel.Dock="Top">
@@ -75,13 +75,13 @@
                                 </StackPanel>
                             </StackPanel>
                         </GroupBox>
-                        <Grid>
+                        <Grid Visibility="{Binding MainWin.VisPlot}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="250*" />
                                 <RowDefinition Height="250*" />
                             </Grid.RowDefinitions>
                             <local:zgWPF Grid.Row="0" x:Name="RAWdataPlot" graphPane="{Binding RAWdata.graphPane, Mode=TwoWay}"/>
-                            <local:zgWPF Grid.Row="1" x:Name="koefPlot" graphPane="{Binding koef.graphPane, Mode=TwoWay}"/>
+                            <local:zgWPF Grid.Row="1" x:Name="miuPlot" graphPane="{Binding miu.graphPane, Mode=TwoWay}"/>
                         </Grid>
                     </DockPanel>
                 </TabItem>
@@ -119,8 +119,6 @@
                             </StackPanel>
                         </GroupBox>
                     </StackPanel>
-                </TabItem>
-                <TabItem>
                 </TabItem>
             </TabControl>
         </DockPanel>
