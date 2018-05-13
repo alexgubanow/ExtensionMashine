@@ -88,7 +88,6 @@ namespace controlExtension
                             Vm.MainWin.Status = bool.Parse(inJSON["status"].ToString()) ? "Good" : "Bad";
                             Vm.MainWin.Status = "Receive status command \"STAT?\" = " + Vm.MainWin.Status;
                             break;
-                        //.ToString("HH:mm:ss.fff", CultureInfo.InvariantCulture)
                         case "hx711?":
                             Vm.exper.time.Add(DateTime.UtcNow - Vm.exper.tStart);
                             Vm.hx711.Value = inJSON["val"].ToString();
@@ -344,7 +343,19 @@ namespace controlExtension
         private void stopBtn_Click(object sender, RoutedEventArgs e)
         {
             sendComm("mRun?", new string[1] { "speed" }, new string[1] { "0" });
-            runExprThrd.Abort();
+            if(runExprThrd != null)
+            {
+                runExprThrd.Abort();
+            }
+        }
+
+        private void rlsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            sendComm("mRelease?");
+            if (runExprThrd != null)
+            {
+                runExprThrd.Abort();
+            }
         }
     }
 }

@@ -49,16 +49,17 @@ public:
 	drv8825(pinsStruct pins, microStepRes mRes)
 	{
 		_pins = pins;
-		EnableDrv(Disable);
+		DisableDrv();
 		Sleep(Disable);
 		Reset(Disable);
 		setRes(mRes);
 	};
 	void setRes(microStepRes mRes);
-	inline void EnableDrv(pinState newState) { _pins.EN.set((GPIO_PinState)newState); }
+	inline void EnableDrv() { _pins.EN.set((GPIO_PinState)0); }
+	inline void DisableDrv() { _pins.EN.set((GPIO_PinState)1); }
 	inline void Sleep(pinState newState) { _pins.SLEEP.set((GPIO_PinState)newState); }
 	inline void Reset(pinState newState) { _pins.RST.set((GPIO_PinState)newState); }
-	inline void Direction(movDir newState) { _pins.RST.set((GPIO_PinState)newState); }
+	inline void Direction(movDir newState) { _pins.DIR.set((GPIO_PinState)newState); }
 	inline pinState getState() { state = _pins.FAULT.get(); return (pinState)state; };
 	~drv8825() {};
 };

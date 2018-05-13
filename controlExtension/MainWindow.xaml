@@ -22,8 +22,12 @@
                     <TextBlock Name="boardStatus" Text="{Binding MainWin.Status}" />
                 </StatusBarItem>
             </StatusBar>
-            <Button DockPanel.Dock="Top" Content="Stop" Margin="5,5,0,0" x:Name="stopBtn" Click="stopBtn_Click"
+            <DockPanel>
+                <Button DockPanel.Dock="Left" Content="Stop" Margin="5,5,0,0" x:Name="stopBtn" Click="stopBtn_Click"
                 Background="Red" Visibility="{Binding comPort.IsConnectedVis}" />
+                <Button DockPanel.Dock="Right" Content="Release" Margin="5,5,0,0" x:Name="rlsBtn" Click="rlsBtn_Click"
+                Background="Red" Visibility="{Binding comPort.IsConnectedVis}" />
+            </DockPanel>
             <TabControl x:Name="tabCntrl">
                 <TabItem Header="Experiment">
                     <DockPanel>
@@ -37,7 +41,7 @@
                                         <TextBox Text="{Binding MainWin.Velosity}" Width="50" />
                                     </StackPanel>
                                     <Border Width="1" Margin="5,0,5,0" Height="20" Visibility="Visible" Background="#FFB9C9DA" />
-                                    <StackPanel Orientation="Horizontal">
+                                    <StackPanel Orientation="Horizontal" IsEnabled="False">
                                         <Label Content="Distanse, m" />
                                         <TextBox Text="{Binding MainWin.Velosity}" Width="50" />
                                     </StackPanel>
