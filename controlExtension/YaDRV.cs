@@ -10,6 +10,7 @@ using System.Windows;
 
 namespace controlExtension
 {
+
     public class YaDRV : IDisposable
     {
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -19,7 +20,16 @@ namespace controlExtension
             public ushort MCUtemp;
             public bool IsNewHX711Value;
         }
-
+        public class StatusReportEventArgs : EventArgs
+        {
+            public StatusReport Status { get; set; }
+            public DateTime TimeReached { get; set; }
+        }
+        public class hx711valueEventArgs : EventArgs
+        {
+            public uint HX711value { get; set; }
+            public DateTime TimeReached { get; set; }
+        }
         private enum CTL
         {
             status,
@@ -30,8 +40,10 @@ namespace controlExtension
         private readonly List<hidDeviceInfo> devs = new List<hidDeviceInfo>();
         private readonly int devIdx = -1;
         private readonly Timer askForStatusTimer;
-        public StatusReport Status { get; private set; }
-        public List<uint> HX711values { get; private set; }
+
+        public event EventHandler NewStatus;
+        public event EventHandler NewHX711value;
+
         public string Error { get; private set; }
         hidapiw _hidapiw_native;
         YaDRV()
@@ -58,7 +70,6 @@ namespace controlExtension
                 askForStatusTimer.Elapsed += new ElapsedEventHandler(AskForStatusEvent);
                 askForStatusTimer.Interval = 200;
                 askForStatusTimer.Start();
-                HX711values = new List<uint>();
             }
             catch (SEHException e)
             {
@@ -76,15 +87,34 @@ namespace controlExtension
         {
             byte[] data = new byte[5] { (byte)CTL.status, 0, 0, 0, 0 };
             _hidapiw_native.Read(devIdx, ref data);
+            StatusReportEventArgs tmp = new StatusReportEventArgs
+            {
+                //status = status,
+                TimeReached = DateTime.Now
+            };
+            OnNewStatus(this, tmp);
             //byte[] -> StatusReport
-            if (Status.IsNewHX711Value)
+            if (tmp.Status.IsNewHX711Value)
             {
                 data = new byte[5] { (byte)CTL.HX711, 0, 0, 0, 0 };
                 _hidapiw_native.Read(devIdx, ref data);
                 //byte[] -> uint
                 uint val = 0;
-                HX711values.Add(val);
+                hx711valueEventArgs _hx711valueEventArgs = new hx711valueEventArgs
+                {
+                    HX711value = val,
+                    TimeReached = DateTime.Now
+                };
+                OnNewHX711value(this, _hx711valueEventArgs);
             }
+        }
+        protected virtual void OnNewStatus(object obj, StatusReportEventArgs e)
+        {
+            NewStatus?.Invoke(this, e);
+        }
+        protected virtual void OnNewHX711value(object obj, hx711valueEventArgs e)
+        {
+            NewStatus?.Invoke(this, e);
         }
         public void Dispose()
         {
