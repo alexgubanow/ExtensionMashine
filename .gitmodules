@@ -1,0 +1,3 @@
+[submodule "hidapiw"]
+	path = hidapiw
+	url = https://github.com/alexgubanow/hidapiw.git
