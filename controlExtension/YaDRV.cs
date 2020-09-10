@@ -25,7 +25,7 @@ namespace controlExtension
             public StatusReport Status { get; set; }
             public DateTime TimeReached { get; set; }
         }
-        public class hx711valueEventArgs : EventArgs
+        public class HX711valueEventArgs : EventArgs
         {
             public uint HX711value { get; set; }
             public DateTime TimeReached { get; set; }
@@ -100,7 +100,7 @@ namespace controlExtension
                 _hidapiw_native.Read(devIdx, ref data);
                 //byte[] -> uint
                 uint val = 0;
-                hx711valueEventArgs _hx711valueEventArgs = new hx711valueEventArgs
+                HX711valueEventArgs _hx711valueEventArgs = new HX711valueEventArgs
                 {
                     HX711value = val,
                     TimeReached = DateTime.Now
@@ -112,12 +112,13 @@ namespace controlExtension
         {
             NewStatus?.Invoke(this, e);
         }
-        protected virtual void OnNewHX711value(object obj, hx711valueEventArgs e)
+        protected virtual void OnNewHX711value(object obj, HX711valueEventArgs e)
         {
             NewStatus?.Invoke(this, e);
         }
         public void Dispose()
         {
+            askForStatusTimer.Stop();
             _hidapiw_native.Close(devIdx);
             _hidapiw_native.Dispose();
         }
