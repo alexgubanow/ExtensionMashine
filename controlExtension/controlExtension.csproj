@@ -52,9 +52,6 @@
     <Reference Include="MahApps.Metro, Version=1.6.1.4, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.6.1\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="OxyPlot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
       <HintPath>..\packages\OxyPlot.Core.1.0.0\lib\net45\OxyPlot.dll</HintPath>
     </Reference>
@@ -93,7 +90,7 @@
     <Compile Include="numPowTen.xaml.cs">
       <DependentUpon>numPowTen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UART.cs" />
+    <Compile Include="YaDRV.cs" />
     <Compile Include="ViewModel\comPort.cs" />
     <Compile Include="ViewModel\exper.cs" />
     <Compile Include="ViewModel\hx711.cs" />
@@ -156,6 +153,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="License-LGPL.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\hidapiw\hidapiw\hidapiw.vcxproj">
+      <Project>{707eb569-886d-480c-bb86-1a3787b71bec}</Project>
+      <Name>hidapiw</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
