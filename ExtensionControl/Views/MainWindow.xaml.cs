@@ -3,7 +3,6 @@ using Prism.Ioc;
 using Prism.Events;
 using Prism.Regions;
 using MahApps.Metro.Controls;
-using TMCRegisterControl.Views;
 using UsbHIDControl.Views;
 
 namespace ExtensionControl.Views
@@ -28,7 +27,6 @@ namespace ExtensionControl.Views
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             _regionManager.Regions["UsbHIDControlRegion"].Add(_container.Resolve<UsbHID>());
-            _regionManager.Regions["TMC2590ControlRegion"].Add(_container.Resolve<TMC2590regs>());
         }
     }
 }

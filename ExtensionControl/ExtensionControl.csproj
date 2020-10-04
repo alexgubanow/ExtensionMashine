@@ -22,10 +22,10 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="MahApps.Metro" Version="2.2.0" />
+    <PackageReference Include="OxyPlot.Wpf" Version="2.0.0" />
     <PackageReference Include="Prism.DryIoc" Version="7.2.0.1422" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TMCRegisterControl\TMCRegisterControl.csproj" />
     <ProjectReference Include="..\UsbHIDControl\UsbHIDControl.csproj" />
   </ItemGroup>
 </Project>

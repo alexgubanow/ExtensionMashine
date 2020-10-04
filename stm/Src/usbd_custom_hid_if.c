@@ -480,10 +480,21 @@ static int8_t CUSTOM_HID_InEvent_FS(uint8_t event_idx, uint8_t* buffer, uint16_t
 	break;
 	case getHX711val:
 	{
-		buffer[0] = hx711value >> 24;
-		buffer[1] = hx711value >> 16;
-		buffer[2] = hx711value >> 8;
-		buffer[3] = hx711value;
+		if (isReadyHX711val)
+		{
+			buffer[0] = hx711value >> 24;
+			buffer[1] = hx711value >> 16;
+			buffer[2] = hx711value >> 8;
+			buffer[3] = hx711value;
+			isReadyHX711val = 0;
+		}
+		else
+		{
+			buffer[0] = 0xFF;
+			buffer[1] = 0xFF;
+			buffer[2] = 0xFF;
+			buffer[3] = 0xFF;
+		}
 		break; 
 	}
 	}

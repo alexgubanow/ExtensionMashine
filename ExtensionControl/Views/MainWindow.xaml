@@ -4,15 +4,17 @@
         xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
+                 xmlns:oxy="http://oxyplot.org/wpf"
                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         Title="{Binding Title}" Height="680" Width="960" Loaded="Window_Loaded" >
     <DockPanel>
-        <!--<ContentControl prism:RegionManager.RegionName="UsbHIDControlRegion" />-->
         <StatusBar DockPanel.Dock="Bottom" Height="34">
             <StatusBarItem prism:RegionManager.RegionName="UsbHIDControlRegion"/>
         </StatusBar>
-        <StackPanel DockPanel.Dock="Top">
-            <ContentControl prism:RegionManager.RegionName="TMC2590ControlRegion" Margin="5" MinHeight="100"/>
-        </StackPanel>
+        <DockPanel DockPanel.Dock="Top" LastChildFill="True">
+            <Button DockPanel.Dock="Bottom" Content="{Binding StartStoptxt}" Command="{Binding StartStopCMD}" 
+                    Margin="5" IsEnabled="{Binding IsConnected}"/>
+            <oxy:PlotView DockPanel.Dock="Top" Model="{Binding HX711RawValuePlotModel}" Margin="5"/>
+        </DockPanel>
     </DockPanel>
 </mah:MetroWindow>

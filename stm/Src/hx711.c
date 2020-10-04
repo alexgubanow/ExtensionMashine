@@ -7,7 +7,6 @@ int hx711value = 0;
 
 void readHX711()
 {
-	isReadyHX711val = 0;
 	hx711value = 0;
 	for (unsigned char i = 0; i < 24; i++)
 	{

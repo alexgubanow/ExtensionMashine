@@ -1,8 +1,8 @@
 ﻿using Prism.Ioc;
 using System.Windows;
-using TuneYaDRV.Views;
+using ExtensionControl.Views;
 
-namespace TuneYaDRV
+namespace ExtensionControl
 {
     /// <summary>
     /// Interaction logic for App.xaml
