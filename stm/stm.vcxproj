@@ -73,6 +73,7 @@
   <ItemGroup>
     <ClCompile Include="Src\adc.c" />
     <ClCompile Include="Src\gpio.c" />
+    <ClCompile Include="Src\hx711.c" />
     <ClCompile Include="Src\main.c" />
     <ClCompile Include="Src\nvm.c" />
     <ClCompile Include="Src\spi.c" />
@@ -88,6 +89,7 @@
     <ClInclude Include="Inc\adc.h" />
     <ClInclude Include="Inc\gpio.h" />
     <ClInclude Include="Inc\hid_macros.h" />
+    <ClInclude Include="Inc\hx711.h" />
     <ClInclude Include="Inc\main.h" />
     <ClInclude Include="Inc\nvm.h" />
     <ClInclude Include="Inc\spi.h" />

@@ -9,7 +9,7 @@
 //extern DRVCONF_t DRVCONF_r;
 
 extern unsigned int TMC2590readResponse;
-extern unsigned int motorVel;
 
 void TMC2590_WriteConfig();
 void TMC2590_writeReg(tmc2590regs_enum reg, unsigned int val);
+void setMotorVel(unsigned int vel);

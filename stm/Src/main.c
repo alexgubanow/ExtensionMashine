@@ -20,7 +20,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "adc.h"
+//#include "adc.h"
 #include "spi.h"
 #include "tim.h"
 #include "usb_device.h"
@@ -30,6 +30,7 @@
 /* USER CODE BEGIN Includes */
 #include "tmc2590.h"
 #include "nvm.h"
+#include "hx711.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -50,6 +51,8 @@
 
 /* USER CODE BEGIN PV */
 __IO uint16_t MCUtemp = 0;
+uint8_t startTrigger = 0;
+uint8_t endTrigger = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -73,6 +76,7 @@ void adc1_tim1Start(void)
 	LL_TIM_EnableCounter(TIM1);
 }
 /* USER CODE END 0 */
+
 /**
   * @brief  The application entry point.
   * @retval int
@@ -104,10 +108,10 @@ int main(void)
   MX_TIM14_Init();
   MX_SPI1_Init();
   MX_USB_DEVICE_Init();
-  MX_ADC_Init();
-  MX_TIM1_Init();
+  //MX_ADC_Init();
+  //MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-  adc1_tim1Start();
+  //adc1_tim1Start();
   LL_GPIO_SetOutputPin(DRV_EN_GPIO_Port, DRV_EN_Pin);
   
   loadParams(1);
@@ -124,7 +128,10 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  if (!(LL_GPIO_ReadInputPort(HX711_DOUT_GPIO_Port) & HX711_DOUT_Pin))
+	  {
+		  readHX711();
+	  }
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

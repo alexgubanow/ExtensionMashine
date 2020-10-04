@@ -71,8 +71,12 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define GRN_LED_Pin LL_GPIO_PIN_0
-#define GRN_LED_GPIO_Port GPIOA
+#define START_Pin LL_GPIO_PIN_0
+#define START_GPIO_Port GPIOA
+#define START_EXTI_IRQn EXTI0_1_IRQn
+#define END_Pin LL_GPIO_PIN_1
+#define END_GPIO_Port GPIOA
+#define END_EXTI_IRQn EXTI0_1_IRQn
 #define DRV_EN_Pin LL_GPIO_PIN_2
 #define DRV_EN_GPIO_Port GPIOA
 #define DIR_Pin LL_GPIO_PIN_3
@@ -81,9 +85,15 @@ void Error_Handler(void);
 #define STEP_GPIO_Port GPIOA
 #define SPI1_CSN_Pin LL_GPIO_PIN_1
 #define SPI1_CSN_GPIO_Port GPIOB
+#define HX711_DOUT_Pin LL_GPIO_PIN_13
+#define HX711_DOUT_GPIO_Port GPIOA
+#define HX711_CLK_Pin LL_GPIO_PIN_14
+#define HX711_CLK_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
 
 extern __IO uint16_t MCUtemp;
+extern uint8_t startTrigger;
+extern uint8_t endTrigger;
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

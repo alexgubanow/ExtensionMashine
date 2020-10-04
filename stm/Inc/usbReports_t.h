@@ -18,5 +18,7 @@ typedef enum usbReports_t
 	CHOPCONFreport,
 	SMARTENreport,
 	SGCSCONFreport,
-	DRVCONFreport
+	DRVCONFreport,
+	setHX711gain,
+	getHX711val
 }usbReports_t;
