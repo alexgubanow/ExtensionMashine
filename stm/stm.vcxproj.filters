@@ -605,6 +605,9 @@
     <ClInclude Include="Inc\hx711.h">
       <Filter>Header files</Filter>
     </ClInclude>
+    <ClInclude Include="motorControl.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\adc.c">
@@ -650,6 +653,9 @@
       <Filter>Source files</Filter>
     </ClCompile>
     <ClCompile Include="Src\hx711.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+    <ClCompile Include="motorControl.c">
       <Filter>Source files</Filter>
     </ClCompile>
   </ItemGroup>

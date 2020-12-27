@@ -20,5 +20,7 @@ typedef enum usbReports_t
 	SGCSCONFreport,
 	DRVCONFreport,
 	setHX711gain,
-	getHX711val
+	getHX711val,
+	runMotorAccelCase,
+	stopMotorAccelCase
 }usbReports_t;

@@ -1,11 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="Current">
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Platforms>AnyCPU;x64;x86</Platforms>
-	<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <FileUpgradeFlags>40</FileUpgradeFlags>
+    <UpgradeBackupLocation>C:\Users\jonas\source\repos\ExtensionMashine\Backup\Events\</UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <OutputPath>..\Debug\</OutputPath>
   </PropertyGroup>
@@ -18,13 +19,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutputPath>..\x64\Release\</OutputPath>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Prism.Core" Version="7.2.0.1422" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\stmCLIw\stmCLIw.vcxproj" />
   </ItemGroup>
-
 </Project>

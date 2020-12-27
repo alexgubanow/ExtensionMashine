@@ -30,6 +30,7 @@
 #include "nvm.h"
 #include "usbReports_t.h"
 #include "hx711.h"
+#include "motorControl.h"
 /* USER CODE END INCLUDE */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -262,10 +263,10 @@ static int8_t CUSTOM_HID_OutEvent_FS(uint8_t event_idx, uint8_t state)
 		Params.DRVCONF_r.w = hhid->Report_buf[1] | hhid->Report_buf[2] << 8 | hhid->Report_buf[3] << 16;
 		TMC2590_writeReg(tmc2590_DRVCONF, Params.DRVCONF_r.w);
 		break;
-	case  IOctl:
+	case IOctl:
 		setIO_Handler(hhid->Report_buf[1]);
 		break;
-	case  velocity:
+	case velocity:
 		setMotorVel(hhid->Report_buf[1] << 8 | hhid->Report_buf[2]);
 		break;
 	case loadDefaults:
